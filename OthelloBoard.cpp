@@ -15,7 +15,7 @@ void OthelloBoard::setPointTo(int x, int y, Piece piece)
 
 QVector<int> OthelloBoard::toQVector() const
 {
-    QVector<int> result(16);
+    QVector<int> result;
     for(const auto& i : _board)
     {
         for(const auto& j : i)

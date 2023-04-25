@@ -11,6 +11,7 @@ qt_standard_project_setup()
 qt_add_executable(appOthello
     main.cpp
     OthelloBoard.h OthelloBoard.cpp
+    OthelloModel.h OthelloModel.cpp
 )
 
 qt_add_qml_module(appOthello
