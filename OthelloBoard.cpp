@@ -27,7 +27,7 @@ QVector<int> OthelloBoard::toQVector() const
     return result;
 }
 
-board_t OthelloBoard::getBoard() const
+const board_t &OthelloBoard::getBoard() const
 {
     return _board;
 }

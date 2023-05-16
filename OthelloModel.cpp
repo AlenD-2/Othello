@@ -12,11 +12,11 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Piece color)
 
     qDebug()<<row << " , " << column << " : " << color;
 
-    auto posList = _game.findOppPos(_board.getBoard(), row, column, color);
+    auto posList = _game.findOppPos(_board, row, column, color);
     if(!posList.empty())
     {
-        auto newBoard = _game.swapPieces(_board.getBoard(), row, column, color, posList);
-        _board.setBoard(newBoard);
+        auto newBoard = _game.swapPieces(_board, row, column, color, posList);
+        _board = newBoard;
         emit boardChanged();
     }
 }

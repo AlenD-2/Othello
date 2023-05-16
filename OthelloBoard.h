@@ -14,12 +14,7 @@ typedef std::array<std::array<int, BOARD_SIZE>, BOARD_SIZE> board_t;
 class OthelloBoard
 {
 public:
-    enum Piece
-    {
-        empty,
-        white,
-        black
-    };
+    enum Piece{empty, white, black};
     struct Position
     {
         int row = -1;
@@ -34,7 +29,7 @@ public:
     OthelloBoard();
     void setPointTo(int x, int y, Piece piece);
     QVector<int> toQVector()const;
-    board_t getBoard()const;
+    const board_t& getBoard()const;
     void setBoard(const board_t& board);
 
 private:
