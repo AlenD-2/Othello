@@ -20,13 +20,16 @@ PositionList_t OthelloLogic::findOppPos(const board_t &board, int row, int colum
     {
         for(int dCol=-1 ; dCol<=1 ; dCol++)
         {
-            // check at least one of Pieces around position is not the same color
-            if(board.at(row+dRow).at(column+dCol) != color)
+            if((row+dRow) < BOARD_SIZE && (row+dRow) >= 0 && (column+dCol) < BOARD_SIZE && (column+dCol) >= 0)
             {
-                auto pos = checkDirection(board, row, column, dRow, dCol, color);
-                if(!pos.isEmpty())
+                // check at least one of Pieces around position is not the same color
+                if(board.at(row+dRow).at(column+dCol) != color)
                 {
-                    result.push_back(pos);
+                    auto pos = checkDirection(board, row, column, dRow, dCol, color);
+                    if(!pos.isEmpty())
+                    {
+                        result.push_back(pos);
+                    }
                 }
             }
         }
@@ -42,10 +45,14 @@ OthelloBoard::Position OthelloLogic::checkDirection(const board_t &board, int ro
     row += dRow;
     column += dCol;
 
-    // check direction is not empty
-    if(board.at(row).at(column) == OthelloBoard::Piece::empty || row < 8 || row >= 0 || column < 8 || column >= 0)
+    // check row and column first to avoid overflow in next if statement
+    if(row >= BOARD_SIZE || row < 0 || column >= BOARD_SIZE || column < 0)
     {
-        return result;
+        return result; // empty result
+    }
+    else if(board.at(row).at(column) == OthelloBoard::Piece::empty)
+    {
+        return result; // empty result
     }
     else if(board.at(row).at(column) == color)
     {
@@ -61,11 +68,13 @@ OthelloBoard::Position OthelloLogic::checkDirection(const board_t &board, int ro
 
 board_t OthelloLogic::swapPieces(board_t board, int row, int column, const OthelloBoard::Piece &color, const PositionList_t &positions)
 {
+    int tempRow = row;
+    int tempCol = column;
     for(const auto pos : positions)
     {
-        // find the directions (-1 or 1)
-        int dRow = (row - pos.row) / abs(row - pos.row);
-        int dCol = (column - pos.column) / abs(column - pos.column);
+        // find the directions (-1 or 0 or 1)
+        int dRow = (pos.row - row == 0)? 0 : (pos.row - row) / abs(pos.row - row);
+        int dCol = (pos.column - column == 0)? 0 : (pos.column - column) / abs(pos.column - column);
 
         while(row != pos.row || column != pos.column)
         {
@@ -73,6 +82,10 @@ board_t OthelloLogic::swapPieces(board_t board, int row, int column, const Othel
             row += dRow;
             column += dCol;
         }
+
+        // restore main position for next swap
+        row = tempRow;
+        column = tempCol;
     }
 
     return board;

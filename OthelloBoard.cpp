@@ -27,6 +27,16 @@ QVector<int> OthelloBoard::toQVector() const
     return result;
 }
 
+board_t OthelloBoard::getBoard() const
+{
+    return _board;
+}
+
+void OthelloBoard::setBoard(const board_t &board)
+{
+    _board = board;
+}
+
 board_t OthelloBoard::newBoard() const
 {
     board_t base;

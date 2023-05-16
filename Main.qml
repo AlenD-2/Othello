@@ -15,6 +15,8 @@ Window {
     property int white: 1
     property int black: 2
 
+    property int playerCounter: 1
+
     OthelloModel{
         id: othelloModel
     }
@@ -39,6 +41,20 @@ Window {
                 color: (modelData === white)? "white" : "black"
                 radius: width/2
                 visible: modelData !== empty
+            }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log("Clicked: "+index)
+                    if(parent.modelData === empty)
+                        return
+                    else
+                    {
+                        var color = (playerCounter%2 == 0)? 1 : 2
+                        playerCounter++;
+                        othelloModel.setPosTo(index,color);
+                    }
+                }
             }
         }
     }

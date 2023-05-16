@@ -7,7 +7,7 @@
 
 namespace Othello {
 
-const uint16_t BOARD_SIZE = 8;
+const int BOARD_SIZE = 8;
 typedef std::array<std::array<int, BOARD_SIZE>, BOARD_SIZE> board_t;
 
 
@@ -34,6 +34,8 @@ public:
     OthelloBoard();
     void setPointTo(int x, int y, Piece piece);
     QVector<int> toQVector()const;
+    board_t getBoard()const;
+    void setBoard(const board_t& board);
 
 private:
     board_t _board;
