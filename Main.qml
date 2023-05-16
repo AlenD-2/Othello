@@ -45,7 +45,6 @@ Window {
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    console.log("Clicked: "+index)
                     if(parent.modelData === empty)
                         return
                     else

@@ -12,11 +12,11 @@ OthelloLogic::OthelloLogic()
  * find the opponent pieces in the current player move to use in swap function
  * it will return a list of positions of opponent pieces
  * return an empty list if this is not a valid move */
-PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, int row, int column, const OthelloBoard::Piece &color)
+PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Piece &color)
 {
     PositionList_t result;
 
-    if(board.getBoard().at(row).at(column) != OthelloBoard::Piece::empty)
+    if(board.getBoard().at(currentPos.row).at(currentPos.column) != OthelloBoard::Piece::empty)
     {
         return result;
     }
@@ -25,12 +25,12 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, int row, int 
     {
         for(int dCol=-1 ; dCol<=1 ; dCol++)
         {
-            if((row+dRow) < BOARD_SIZE && (row+dRow) >= 0 && (column+dCol) < BOARD_SIZE && (column+dCol) >= 0)
+            if((currentPos.row+dRow) < BOARD_SIZE && (currentPos.row+dRow) >= 0 && (currentPos.column+dCol) < BOARD_SIZE && (currentPos.column+dCol) >= 0)
             {
                 // check at least one of Pieces around position is not the same color
-                if(board.getBoard().at(row+dRow).at(column+dCol) != color)
+                if(board.getBoard().at(currentPos.row+dRow).at(currentPos.column+dCol) != color)
                 {
-                    auto pos = checkDirection(board, row, column, dRow, dCol, color);
+                    auto pos = checkDirection(board, currentPos, dRow, dCol, color);
                     if(!pos.isEmpty())
                     {
                         result.push_back(pos);
@@ -43,54 +43,54 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, int row, int 
     return result;
 }
 
-OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, int row, int column, int dRow, int dCol, const OthelloBoard::Piece &color)
+OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Piece &color)
 {
     OthelloBoard::Position result;
 
-    row += dRow;
-    column += dCol;
+    currentPos.row += dRow;
+    currentPos.column += dCol;
 
     // check row and column first to avoid overflow in next if statement
-    if(row >= BOARD_SIZE || row < 0 || column >= BOARD_SIZE || column < 0)
+    if(currentPos.row >= BOARD_SIZE || currentPos.row < 0 || currentPos.column >= BOARD_SIZE || currentPos.column < 0)
     {
         return result; // empty result
     }
-    else if(board.getBoard().at(row).at(column) == OthelloBoard::Piece::empty)
+    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == OthelloBoard::Piece::empty)
     {
         return result; // empty result
     }
-    else if(board.getBoard().at(row).at(column) == color)
+    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == color)
     {
-        result.row = row;
-        result.column = column;
+        result.row = currentPos.row;
+        result.column = currentPos.column;
         return result;
     }
     else
     {
-        return checkDirection(board, row, column, dRow, dCol, color);
+        return checkDirection(board, currentPos, dRow, dCol, color);
     }
 }
 
-OthelloBoard OthelloLogic::swapPieces(OthelloBoard &board, int row, int column, const OthelloBoard::Piece &color, const PositionList_t &positions)
+OthelloBoard OthelloLogic::swapPieces(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Piece &color, const PositionList_t &positions)
 {
-    int tempRow = row;
-    int tempCol = column;
+    int tempRow = currentPos.row;
+    int tempCol = currentPos.column;
     for(const auto pos : positions)
     {
         // find the directions (-1 or 0 or 1)
-        int dRow = (pos.row - row == 0)? 0 : (pos.row - row) / abs(pos.row - row);
-        int dCol = (pos.column - column == 0)? 0 : (pos.column - column) / abs(pos.column - column);
+        int dRow = (pos.row - currentPos.row == 0)? 0 : (pos.row - currentPos.row) / abs(pos.row - currentPos.row);
+        int dCol = (pos.column - currentPos.column == 0)? 0 : (pos.column - currentPos.column) / abs(pos.column - currentPos.column);
 
-        while(row != pos.row || column != pos.column)
+        while(currentPos.row != pos.row || currentPos.column != pos.column)
         {
-            board.setPointTo(row, column, color);//board.at(row).at(column) = color;
-            row += dRow;
-            column += dCol;
+            board.setPointTo(currentPos, color);//board.at(row).at(column) = color;
+            currentPos.row += dRow;
+            currentPos.column += dCol;
         }
 
         // restore main position for next swap
-        row = tempRow;
-        column = tempCol;
+        currentPos.row = tempRow;
+        currentPos.column = tempCol;
     }
 
     return board;

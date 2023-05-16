@@ -27,7 +27,7 @@ public:
 
 public:
     OthelloBoard();
-    void setPointTo(int x, int y, Piece piece);
+    void setPointTo(Position position, Piece piece);
     QVector<int> toQVector()const;
     const board_t& getBoard()const;
     void setBoard(const board_t& board);

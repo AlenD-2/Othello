@@ -8,9 +8,9 @@ OthelloBoard::OthelloBoard()
     _board = newBoard();
 }
 
-void OthelloBoard::setPointTo(int x, int y, Piece piece)
+void OthelloBoard::setPointTo(Position position, Piece piece)
 {
-    _board.at(x).at(y) = piece;
+    _board.at(position.row).at(position.column) = piece;
 }
 
 QVector<int> OthelloBoard::toQVector() const
