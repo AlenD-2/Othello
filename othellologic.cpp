@@ -16,6 +16,11 @@ PositionList_t OthelloLogic::findOppPos(const board_t &board, int row, int colum
 {
     PositionList_t result;
 
+    if(board.at(row).at(column) != OthelloBoard::Piece::empty)
+    {
+        return result;
+    }
+
     for(int dRow=-1 ; dRow<=1 ; dRow++)
     {
         for(int dCol=-1 ; dCol<=1 ; dCol++)
