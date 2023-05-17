@@ -37,6 +37,23 @@ void OthelloBoard::setBoard(const board_t &board)
     _board = board;
 }
 
+OthelloBoard::PieceCount OthelloBoard::getPieceCount() const
+{
+    PieceCount result;
+
+    for(const auto& row : _board)
+    {
+        for(const auto& piece : row)
+        {
+            if(piece != Piece::empty)
+            {
+                piece == Piece::white ? result.white++ : result.black++;
+            }
+        }
+    }
+    return result;
+}
+
 board_t OthelloBoard::newBoard() const
 {
     board_t base;
