@@ -9,14 +9,14 @@ OthelloLogic::OthelloLogic()
 }
 
 /*
- * find the opponent pieces in the current player move to use in swap function
- * it will return a list of positions of opponent pieces
+ * find the opponent Disks in the current player move to use in swap function
+ * it will return a list of positions of opponent Disks
  * return an empty list if this is not a valid move */
-PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Piece &color)
+PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk &color)
 {
     PositionList_t result;
 
-    if(board.getBoard().at(currentPos.row).at(currentPos.column) != OthelloBoard::Piece::empty)
+    if(board.getBoard().at(currentPos.row).at(currentPos.column) != OthelloBoard::Disk::empty)
     {
         return result;
     }
@@ -27,7 +27,7 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
         {
             if((currentPos.row+dRow) < BOARD_SIZE && (currentPos.row+dRow) >= 0 && (currentPos.column+dCol) < BOARD_SIZE && (currentPos.column+dCol) >= 0)
             {
-                // check at least one of Pieces around position is not the same color
+                // check at least one of Disks around position is not the same color
                 if(board.getBoard().at(currentPos.row+dRow).at(currentPos.column+dCol) != color)
                 {
                     auto pos = checkDirection(board, currentPos, dRow, dCol, color);
@@ -43,7 +43,7 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
     return result;
 }
 
-OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Piece &color)
+OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Disk &color)
 {
     OthelloBoard::Position result;
 
@@ -55,7 +55,7 @@ OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, O
     {
         return result; // empty result
     }
-    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == OthelloBoard::Piece::empty)
+    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == OthelloBoard::Disk::empty)
     {
         return result; // empty result
     }
@@ -71,7 +71,7 @@ OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, O
     }
 }
 
-OthelloBoard OthelloLogic::swapPieces(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Piece &color, const PositionList_t &positions)
+OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk &color, const PositionList_t &positions)
 {
     int tempRow = currentPos.row;
     int tempCol = currentPos.column;

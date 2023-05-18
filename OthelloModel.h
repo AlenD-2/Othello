@@ -18,7 +18,7 @@ public:
     Q_PROPERTY(int whiteCount READ whiteCount /*WRITE setwhiteCount*/ NOTIFY whiteCountChanged);
     Q_PROPERTY(int blackCount READ blackCount /*WRITE setBlackCount*/ NOTIFY blackCountChanged);
 
-    Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Piece color);
+    Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
 
 public:
     explicit OthelloModel(QObject *parent = nullptr);

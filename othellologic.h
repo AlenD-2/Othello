@@ -14,11 +14,11 @@ class OthelloLogic
 public:
     OthelloLogic();
 
-    PositionList_t findOppPos(const OthelloBoard& board, OthelloBoard::Position currentPos, const OthelloBoard::Piece& color);
-    OthelloBoard swapPieces(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Piece& color, const PositionList_t& positions);
+    PositionList_t findOppPos(const OthelloBoard& board, OthelloBoard::Position currentPos, const OthelloBoard::Disk& color);
+    OthelloBoard swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk& color, const PositionList_t& positions);
 
 private:
-    OthelloBoard::Position checkDirection(const OthelloBoard& board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Piece& color);
+    OthelloBoard::Position checkDirection(const OthelloBoard& board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Disk& color);
 };
 
 } // namespace Othello

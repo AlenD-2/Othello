@@ -8,9 +8,9 @@ OthelloBoard::OthelloBoard()
     _board = newBoard();
 }
 
-void OthelloBoard::setPointTo(Position position, Piece piece)
+void OthelloBoard::setPointTo(Position position, Disk disk)
 {
-    _board.at(position.row).at(position.column) = piece;
+    _board.at(position.row).at(position.column) = disk;
 }
 
 QVector<int> OthelloBoard::toQVector() const
@@ -37,17 +37,17 @@ void OthelloBoard::setBoard(const board_t &board)
     _board = board;
 }
 
-OthelloBoard::PieceCount OthelloBoard::getPieceCount() const
+OthelloBoard::DiskCount OthelloBoard::getDiskCount() const
 {
-    PieceCount result;
+    DiskCount result;
 
     for(const auto& row : _board)
     {
-        for(const auto& piece : row)
+        for(const auto& disk : row)
         {
-            if(piece != Piece::empty)
+            if(disk != Disk::empty)
             {
-                piece == Piece::white ? result.white++ : result.black++;
+                disk == Disk::white ? result.white++ : result.black++;
             }
         }
     }
@@ -61,13 +61,13 @@ board_t OthelloBoard::newBoard() const
     {
         for(auto& j : i)
         {
-            j = Piece::empty;
+            j = Disk::empty;
         }
     }
-    base.at(3).at(3) = Piece::white;
-    base.at(4).at(4) = Piece::white;
-    base.at(3).at(4) = Piece::black;
-    base.at(4).at(3) = Piece::black;
+    base.at(3).at(3) = Disk::white;
+    base.at(4).at(4) = Disk::white;
+    base.at(3).at(4) = Disk::black;
+    base.at(4).at(3) = Disk::black;
 
     return base;
 }

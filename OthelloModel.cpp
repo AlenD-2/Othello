@@ -5,7 +5,7 @@
 
 namespace Othello {
 
-void OthelloModel::setPosTo(int index, OthelloBoard::Piece color)
+void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
 {
     OthelloBoard::Position userPos;
     userPos.row = index/BOARD_SIZE;
@@ -14,7 +14,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Piece color)
     auto posList = _game.findOppPos(_board, userPos, color);
     if(!posList.empty())
     {
-        auto newBoard = _game.swapPieces(_board, userPos, color, posList);
+        auto newBoard = _game.swapDisks(_board, userPos, color, posList);
         _board = newBoard;
         emit boardChanged();
         emit whiteCountChanged();
@@ -35,12 +35,12 @@ QVector<int> OthelloModel::board()
 
 int OthelloModel::whiteCount()
 {
-    return _board.getPieceCount().white;
+    return _board.getDiskCount().white;
 }
 
 int OthelloModel::blackCount()
 {
-    return _board.getPieceCount().black;
+    return _board.getDiskCount().black;
 }
 
 } // namespace Othello
