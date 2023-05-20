@@ -37,6 +37,8 @@ public:
     const board_t& getBoard()const;
     void setBoard(const board_t& board);
     DiskCount getDiskCount()const;
+    Disk getWinner()const;
+    bool isFull()const;
 
 private:
     board_t _board;

@@ -54,6 +54,39 @@ OthelloBoard::DiskCount OthelloBoard::getDiskCount() const
     return result;
 }
 
+OthelloBoard::Disk OthelloBoard::getWinner() const
+{
+    auto dc = getDiskCount();
+    if(dc.black > dc.white)
+    {
+        return Disk::black;
+    }
+    else if(dc.white > dc.black)
+    {
+        return Disk::white;
+    }
+    else
+    {
+        // black == white
+        return Disk::empty;
+    }
+}
+
+bool OthelloBoard::isFull() const
+{
+    for(const auto& row : _board)
+    {
+        for(const auto& disk : row)
+        {
+            if(disk == Disk::empty)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 board_t OthelloBoard::newBoard() const
 {
     board_t base;

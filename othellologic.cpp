@@ -71,6 +71,15 @@ OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, O
     }
 }
 
+bool OthelloLogic::isGameOver(const OthelloBoard &board)
+{
+    if(board.isFull() || board.getDiskCount().black == 0 || board.getDiskCount().white == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk &color, const PositionList_t &positions)
 {
     int tempRow = currentPos.row;
@@ -92,7 +101,6 @@ OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position
         currentPos.row = tempRow;
         currentPos.column = tempCol;
     }
-
     return board;
 }
 
