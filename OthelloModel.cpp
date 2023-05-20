@@ -19,6 +19,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         emit boardChanged();
         emit whiteCountChanged();
         emit blackCountChanged();
+        exchangeTurn(_whosTurn);
     }
 
     if(_game.isGameOver(_board))
@@ -32,6 +33,7 @@ OthelloModel::OthelloModel(QObject *parent)
     : QObject{parent}
 {
     _winner = static_cast<OthelloBoard::Disk>(GAME_IS_NOT_OVER);
+    _whosTurn = OthelloBoard::Disk::black;
 }
 
 QVector<int> OthelloModel::board()
@@ -52,6 +54,16 @@ int OthelloModel::blackCount()
 int OthelloModel::winner()
 {
     return _winner;
+}
+
+int OthelloModel::whosTurn()
+{
+    return _whosTurn;
+}
+
+void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)
+{
+    disk = (disk==OthelloBoard::Disk::black)? OthelloBoard::Disk::white : OthelloBoard::Disk::black;
 }
 
 } // namespace Othello

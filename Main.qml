@@ -77,9 +77,7 @@ Window {
                             return
                         else
                         {
-                            var color = (playerCounter%2 == 0)? 1 : 2
-                            playerCounter++;
-                            othelloModel.setPosTo(index,color);
+                            othelloModel.setPosTo(index,othelloModel.whosTurn);
                         }
                     }
                 }
