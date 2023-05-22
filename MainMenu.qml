@@ -2,9 +2,10 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-Item {
+Rectangle {
     id: mainMenu
     anchors.fill: parent
+    color: "green"
 
     property int btnWidth: 120
     property int btnHeight: 40
@@ -13,7 +14,7 @@ Item {
     ColumnLayout{
         anchors.centerIn: parent
         width: childrenRect.width
-        spacing: 10
+        spacing: 15
         Button{
             text: "Human Vs Human"
             font.pointSize: btnFontSize

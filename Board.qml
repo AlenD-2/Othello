@@ -15,6 +15,7 @@ Item {
         id: countBoard
         width: root.width/4
         height: root.height/14
+        y: 5
         anchors.horizontalCenter: parent.horizontalCenter
         color: "transparent"
         border.color: "black"
