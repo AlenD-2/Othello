@@ -80,6 +80,32 @@ bool OthelloLogic::isGameOver(const OthelloBoard &board)
     return false;
 }
 
+
+/*
+ * check all empty positions of the board to check if
+ * there is at least one position that player can play
+ * or not, if not then it means Pass the turn
+ */
+bool OthelloLogic::passTurn(const OthelloBoard &board, const OthelloBoard::Disk &color)
+{
+    for(int i=0 ; i<BOARD_SIZE ; i++)
+    {
+        for(int j=0 ; j<BOARD_SIZE ; j++)
+        {
+            if(board.getBoard().at(i).at(j) == OthelloBoard::Disk::empty)
+            {
+                auto posList = findOppPos(board, OthelloBoard::Position{i,j}, color);
+                if(!posList.empty())
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk &color, const PositionList_t &positions)
 {
     int tempRow = currentPos.row;

@@ -21,6 +21,13 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         emit blackCountChanged();
         exchangeTurn(_whosTurn);
     }
+    else
+    {
+        if(_game.passTurn(_board, color))
+        {
+            exchangeTurn(_whosTurn);
+        }
+    }
 
     if(_game.isGameOver(_board))
     {
