@@ -13,9 +13,10 @@ public:
     explicit Player();
     ~Player();
 
+    QString getName();
+
 signals:
-    void playerReady(QString name);
-    void readyRead(int index);
+    void playerReady();
 
 public slots:
     void readPlayerName();
@@ -25,6 +26,7 @@ private:
 
     QThread _playerThread;
     std::unique_ptr<QProcess> _playerProcess;
+    QString _name;
 
     //functions
     void initProcess();

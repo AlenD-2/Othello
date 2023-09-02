@@ -3,6 +3,7 @@ import QtQuick.Window
 import QtQuick.Controls
 
 import OthelloModel 1.0
+import PlayerModel 1.0
 
 Window {
     id: root
@@ -13,6 +14,10 @@ Window {
 
     OthelloModel{
         id: othelloModel
+    }
+
+    PlayerModel{
+        id: playerModel
     }
 
     Loader{
