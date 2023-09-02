@@ -14,6 +14,7 @@ qt_add_executable(appOthello
     OthelloModel.h OthelloModel.cpp
     Player.h Player.cpp
     OthelloLogic.h OthelloLogic.cpp
+    PlayersModel.h PlayersModel.cpp
 )
 
 qt_add_qml_module(appOthello
