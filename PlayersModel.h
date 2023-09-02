@@ -10,7 +10,7 @@ class PlayersModel : public QObject
 
 public:
     Q_PROPERTY(QString player1Name READ player1Name /*WRITE setPlayer1Name*/ NOTIFY player1NameChanged FINAL);
-    Q_PROPERTY(int player1Move READ player1Move WRITE setPlayer1Move NOTIFY player1MoveChanged FINAL);
+    Q_PROPERTY(int player1Move READ player1Move /*WRITE setPlayer1Move*/ NOTIFY player1MoveChanged FINAL);
 
     Q_INVOKABLE void sendBoardToPlayer1(QVector<int> board);
 
@@ -34,7 +34,7 @@ public slots:
 
 private:
     Player _player1;
-    int _player1LastMove;
+    int _player1LastMove=0;
 
 };
 
