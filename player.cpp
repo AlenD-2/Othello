@@ -20,7 +20,7 @@ QString Player::getName()
 
 void Player::readPlayerName()
 {
-    // initialize Player process (allocate memmory and start process
+    // initialize Player process (allocate memmory and start process)
     initProcess();
 
     _playerProcess->waitForReadyRead();
@@ -32,7 +32,14 @@ void Player::killProcess()
 {
     _playerProcess->kill();
     _playerProcess->waitForFinished(10000);
-    qDebug()<<_playerProcess->isOpen();
+}
+
+void Player::writeBoard(QString board)
+{
+    _playerProcess->write(board.toUtf8()+'\n');
+    _playerProcess->waitForReadyRead();
+    auto input = _playerProcess->readAllStandardOutput();
+    emit readyReadMove(input);
 }
 
 void Player::initProcess()

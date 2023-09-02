@@ -11,6 +11,7 @@ PlayersModel::PlayersModel(QObject *parent)
 PlayersModel::~PlayersModel()
 {
     emit programFinished();
+    // need an interrupt to allow the process enough time to be terminated
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
