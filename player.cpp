@@ -10,12 +10,7 @@ Player::Player()
 
 Player::~Player()
 {
-    _playerThread.terminate();
-}
-
-QString Player::getName()
-{
-    return _name;
+    _playerThread.exit();
 }
 
 void Player::readPlayerName()
@@ -24,8 +19,9 @@ void Player::readPlayerName()
     initProcess();
 
     _playerProcess->waitForReadyRead();
-    _name = _playerProcess->readAllStandardOutput();
-    emit playerReady();
+    auto name = _playerProcess->readAllStandardOutput();
+    qDebug()<<"player name = " << name;
+    emit playerReady(name);
 }
 
 void Player::killProcess()

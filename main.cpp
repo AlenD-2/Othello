@@ -1,6 +1,5 @@
 
 #include "OthelloModel.h"
-#include "PlayersModel.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -11,7 +10,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<Othello::OthelloModel>("OthelloModel",1,0,"OthelloModel");
-    qmlRegisterType<PlayersModel>("PlayerModel",1,0,"PlayerModel");
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/Othello/Main.qml"_qs);
