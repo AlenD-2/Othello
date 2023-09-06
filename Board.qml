@@ -11,19 +11,6 @@ Item {
     property int playerCounter: 1
 
 
-    Text{
-        text: playerModel.player1Name
-    }
-    Text{
-        text: playerModel.player1Move
-        visible: false
-        anchors.bottom: parent.bottom
-        onTextChanged: {
-            othelloModel.setPosTo(playerModel.player1Move, othelloModel.whosTurn);
-        }
-    }
-
-
     Rectangle{
         id: countBoard
         width: root.width/4
@@ -80,7 +67,6 @@ Item {
                         else
                         {
                             othelloModel.setPosTo(index,othelloModel.whosTurn);
-                            playerModel.sendBoardToPlayer1(othelloModel.board)
                         }
                     }
                 }

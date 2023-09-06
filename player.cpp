@@ -36,11 +36,9 @@ void Player::killProcess()
 
 void Player::writeBoard(QString board)
 {
-    qDebug()<<"write: "<<board;
     _playerProcess->write(board.toUtf8()+'\n');
     _playerProcess->waitForReadyRead();
     auto input = _playerProcess->readAllStandardOutput();
-    qDebug()<<"read: "<<input;
     emit readyReadMove(input);
 }
 
