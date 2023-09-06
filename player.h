@@ -14,13 +14,8 @@ public:
     ~Player();
 
 signals:
-<<<<<<< HEAD
     void playerReady();
     void readyReadMove(QString move);
-=======
-    void playerReady(QString name);
-    void readyRead(int index);
->>>>>>> parent of 3b4a7d8 (Add & Fix: add PlayerModel to QML & Fix kill process on application finished)
 
 public slots:
     void readPlayerName();

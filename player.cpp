@@ -21,7 +21,7 @@ void Player::readPlayerName()
     _playerProcess->waitForReadyRead();
     auto name = _playerProcess->readAllStandardOutput();
     qDebug()<<"player name = " << name;
-    emit playerReady(name);
+    emit playerReady();
 }
 
 void Player::killProcess()
