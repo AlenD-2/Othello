@@ -1,16 +1,24 @@
 #include "Player.h"
 #include <QDir>
 
+namespace Othello {
+
+
 Player::Player()
 {
-    this->moveToThread(&_playerThread);
     connect(&_playerThread, &QThread::started, this, &Player::readPlayerName);
-    _playerThread.start();
 }
 
 Player::~Player()
 {
     _playerThread.exit();
+}
+
+void Othello::Player::start(OthelloBoard::Disk color)
+{
+    _color = color;
+    this->moveToThread(&_playerThread);
+    _playerThread.start();
 }
 
 QString Player::getPlayerName() const
@@ -34,7 +42,7 @@ void Player::killProcess()
     _playerProcess->waitForFinished(10000);
 }
 
-void Player::writeBoard(QString board)
+void Player::readyToMove(QString board)
 {
     _playerProcess->write(board.toUtf8()+'\n');
     _playerProcess->waitForReadyRead();
@@ -51,4 +59,6 @@ void Player::initProcess()
     {
         qDebug()<<"Error: can't start the process";
     }
+}
+
 }
