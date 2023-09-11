@@ -30,6 +30,7 @@ public:
 
 public:
     explicit OthelloModel(QObject *parent = nullptr);
+    ~OthelloModel();
 
 signals:
     void boardChanged();
@@ -39,6 +40,7 @@ signals:
     void whosTurnChanged();
 
     void playersNameChanged();
+    void programFinished();
 
 public slots:
     QVector<int> board();

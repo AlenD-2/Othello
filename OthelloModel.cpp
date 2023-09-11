@@ -43,6 +43,14 @@ OthelloModel::OthelloModel(QObject *parent)
     _whosTurn = OthelloBoard::Disk::black;
 
     connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
+    connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
+}
+
+OthelloModel::~OthelloModel()
+{
+    emit programFinished();
+    // need a few delay to have enough time to kill the player process
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 QVector<int> OthelloModel::board()
