@@ -13,6 +13,8 @@ public:
     explicit Player();
     ~Player();
 
+    QString getPlayerName()const;
+
 signals:
     void playerReady();
     void readyReadMove(QString move);
@@ -25,6 +27,7 @@ public slots:
 private:
     QThread _playerThread;
     std::unique_ptr<QProcess> _playerProcess;
+    QString _playerName;
 
     //functions
     void initProcess();

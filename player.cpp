@@ -13,14 +13,18 @@ Player::~Player()
     _playerThread.exit();
 }
 
+QString Player::getPlayerName() const
+{
+    return _playerName;
+}
+
 void Player::readPlayerName()
 {
     // initialize Player process (allocate memmory and start process)
     initProcess();
 
     _playerProcess->waitForReadyRead();
-    auto name = _playerProcess->readAllStandardOutput();
-    qDebug()<<"player name = " << name;
+    _playerName = _playerProcess->readAllStandardOutput();
     emit playerReady();
 }
 
