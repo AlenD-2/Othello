@@ -41,6 +41,8 @@ OthelloModel::OthelloModel(QObject *parent)
 {
     _winner = static_cast<OthelloBoard::Disk>(GAME_IS_NOT_OVER);
     _whosTurn = OthelloBoard::Disk::black;
+
+    connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
 }
 
 QVector<int> OthelloModel::board()
@@ -66,6 +68,18 @@ int OthelloModel::winner()
 int OthelloModel::whosTurn()
 {
     return _whosTurn;
+}
+
+QStringList OthelloModel::playersName()
+{
+    return _playersName;
+}
+
+void OthelloModel::onPlayerReady()
+{
+    _playersName[0] = "Human";
+    _playersName[1] = _player1.getPlayerName();
+    emit playersNameChanged();
 }
 
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)

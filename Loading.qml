@@ -14,7 +14,7 @@ Rectangle {
             height: childrenRect.height
             Text{
                 id: txt1
-                text: ""
+                text: othelloModel.playersName[0]
                 visible: text !== ""
                 anchors.centerIn: parent
             }
@@ -32,7 +32,7 @@ Rectangle {
             height: childrenRect.height
             Text{
                 id: txt2
-                text: ""
+                text: othelloModel.playersName[1]
                 visible: text !== ""
                 anchors.centerIn: parent
                 font.pointSize: 32

@@ -3,6 +3,7 @@
 
 #include "OthelloBoard.h"
 #include "OthelloLogic.h"
+#include "Player.h"
 
 #include <QObject>
 #include <QVector>
@@ -22,6 +23,9 @@ public:
     Q_PROPERTY(int winner READ winner /*WRITE setWinner*/ NOTIFY winnerChanged);
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
 
+    //players property
+    Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
+
     Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
 
 public:
@@ -34,6 +38,8 @@ signals:
     void winnerChanged();
     void whosTurnChanged();
 
+    void playersNameChanged();
+
 public slots:
     QVector<int> board();
     int whiteCount();
@@ -41,11 +47,17 @@ public slots:
     int winner();
     int whosTurn();
 
+    QStringList playersName();
+    void onPlayerReady();
+
 private:
     OthelloBoard _board;
     OthelloLogic _game;
     OthelloBoard::Disk _winner;
     OthelloBoard::Disk _whosTurn;
+
+    Player _player1;
+    QStringList _playersName{"",""};
 
     void exchangeTurn(OthelloBoard::Disk &disk);
 };
