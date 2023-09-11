@@ -19,7 +19,7 @@ qt_add_executable(appOthello
 qt_add_qml_module(appOthello
     URI Othello
     VERSION 1.0
-    QML_FILES Main.qml MainMenu.qml Board.qml
+    QML_FILES Main.qml MainMenu.qml Board.qml Loading.qml
 )
 
 set_target_properties(appOthello PROPERTIES

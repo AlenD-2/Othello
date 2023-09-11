@@ -31,7 +31,9 @@ Rectangle {
             font.bold: true
             Layout.preferredHeight: btnHeight
             Layout.alignment: Qt.AlignHCenter
-            enabled: false
+            onClicked: {
+                loader.source = "Loading.qml"
+            }
         }
         Button{
             text: "Code Vs Code"
