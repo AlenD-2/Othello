@@ -34,6 +34,12 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         _winner = _board.getWinner();
         emit winnerChanged();
     }
+
+    // if it's Ai turn in Human vs Code Mode
+    if(_gameMode == Mode::HvC && color == OthelloBoard::Disk::white)
+    {
+        emit player1Move(_board.toQString());
+    }
 }
 
 void OthelloModel::setGameMode(int modeIndex)
@@ -58,6 +64,8 @@ OthelloModel::OthelloModel(QObject *parent)
 
     connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
+    connect(this, &OthelloModel::player1Move, &_player1, &Player::readyToMove);
+    connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayer1Move);
 }
 
 OthelloModel::~OthelloModel()
@@ -117,6 +125,11 @@ void OthelloModel::onPlayerReady()
     }
 
     emit playersNameChanged();
+}
+
+void OthelloModel::readPlayer1Move(QString move)
+{
+    setPosTo(move.toInt(), OthelloBoard::Disk::black);
 }
 
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)

@@ -44,6 +44,7 @@ signals:
 
     void playersNameChanged();
     void programFinished();
+    void player1Move(QString);
 
 public slots:
     QVector<int> board();
@@ -54,6 +55,7 @@ public slots:
 
     QStringList playersName();
     void onPlayerReady();
+    void readPlayer1Move(QString move);
 
 private:
     OthelloBoard _board;
