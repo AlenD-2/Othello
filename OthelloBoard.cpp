@@ -27,6 +27,20 @@ QVector<int> OthelloBoard::toQVector() const
     return result;
 }
 
+QString OthelloBoard::toQString() const
+{
+    QString result;
+    for(const auto& i : _board)
+    {
+        for(const auto& j : i)
+        {
+            result.append(QString::number(j));
+        }
+    }
+
+    return result;
+}
+
 const board_t &OthelloBoard::getBoard() const
 {
     return _board;

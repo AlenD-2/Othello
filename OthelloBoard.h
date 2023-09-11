@@ -34,6 +34,7 @@ public:
     OthelloBoard();
     void setPointTo(Position position, Disk disk);
     QVector<int> toQVector()const;
+    QString toQString()const;
     const board_t& getBoard()const;
     void setBoard(const board_t& board);
     DiskCount getDiskCount()const;
