@@ -13,6 +13,8 @@ namespace Othello {
 
 constexpr int GAME_IS_NOT_OVER = -1;
 
+enum Mode{HvH, HvC, CvC};
+
 class OthelloModel : public QObject
 {
     Q_OBJECT
@@ -27,6 +29,7 @@ public:
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
 
     Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
+    Q_INVOKABLE void setGameMode(int modeIndex);
 
 public:
     explicit OthelloModel(QObject *parent = nullptr);
@@ -57,6 +60,7 @@ private:
     OthelloLogic _game;
     OthelloBoard::Disk _winner;
     OthelloBoard::Disk _whosTurn;
+    Mode _gameMode;
 
     Player _player1;
     QStringList _playersName{"",""};

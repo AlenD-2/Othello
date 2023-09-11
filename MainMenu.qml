@@ -22,6 +22,7 @@ Rectangle {
             Layout.preferredHeight: btnHeight
             Layout.alignment: Qt.AlignHCenter
             onClicked:{
+                othelloModel.setGameMode(0);
                 loader.source = "Board.qml"
             }
         }
@@ -32,6 +33,7 @@ Rectangle {
             Layout.preferredHeight: btnHeight
             Layout.alignment: Qt.AlignHCenter
             onClicked: {
+                othelloModel.setGameMode(1);
                 loader.source = "Loading.qml"
             }
         }
