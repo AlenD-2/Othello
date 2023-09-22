@@ -45,4 +45,19 @@ Rectangle {
             }
         }
     }
+
+    Button{
+        text: "Start"
+        width: 100
+        height: 60
+        anchors{
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+            bottomMargin: 50
+        }
+        enabled: txt2.text !== "" || txt1.text !== ""
+        onClicked: {
+            loader.source = "Board.qml"
+        }
+    }
 }
