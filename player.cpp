@@ -12,6 +12,7 @@ Player::Player()
 Player::~Player()
 {
     _playerThread.exit();
+    _playerThread.wait();
 }
 
 void Othello::Player::start(OthelloBoard::Disk color)
