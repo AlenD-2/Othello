@@ -129,7 +129,7 @@ void OthelloModel::onPlayerReady()
 
 void OthelloModel::readPlayer1Move(QString move)
 {
-    setPosTo(move.toInt(), OthelloBoard::Disk::black);
+    setPosTo(move.toInt(), OthelloBoard::Disk::white);
 }
 
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)
