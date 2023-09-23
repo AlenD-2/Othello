@@ -16,7 +16,7 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
 {
     PositionList_t result;
 
-    if(board.getBoard().at(currentPos.row).at(currentPos.column) != OthelloBoard::Disk::empty)
+    if(board.at(currentPos) != OthelloBoard::Disk::empty)
     {
         return result;
     }
@@ -28,7 +28,7 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
             if((currentPos.row+dRow) < BOARD_SIZE && (currentPos.row+dRow) >= 0 && (currentPos.column+dCol) < BOARD_SIZE && (currentPos.column+dCol) >= 0)
             {
                 // check at least one of Disks around position is not the same color
-                if(board.getBoard().at(currentPos.row+dRow).at(currentPos.column+dCol) != color)
+                if(board.at(currentPos) != color)
                 {
                     auto pos = checkDirection(board, currentPos, dRow, dCol, color);
                     if(!pos.isEmpty())
@@ -55,11 +55,11 @@ OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, O
     {
         return result; // empty result
     }
-    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == OthelloBoard::Disk::empty)
+    else if(board.at(currentPos) == OthelloBoard::Disk::empty)
     {
         return result; // empty result
     }
-    else if(board.getBoard().at(currentPos.row).at(currentPos.column) == color)
+    else if(board.at(currentPos) == color)
     {
         result.row = currentPos.row;
         result.column = currentPos.column;
@@ -92,7 +92,7 @@ bool OthelloLogic::passTurn(const OthelloBoard &board, const OthelloBoard::Disk 
     {
         for(int j=0 ; j<BOARD_SIZE ; j++)
         {
-            if(board.getBoard().at(i).at(j) == OthelloBoard::Disk::empty)
+            if(board.at(OthelloBoard::Position{i,j}) == OthelloBoard::Disk::empty)
             {
                 auto posList = findOppPos(board, OthelloBoard::Position{i,j}, color);
                 if(!posList.empty())

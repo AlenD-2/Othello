@@ -101,6 +101,11 @@ bool OthelloBoard::isFull() const
     return true;
 }
 
+OthelloBoard::Disk OthelloBoard::at(const Position &pos) const
+{
+    return static_cast<Disk>(_board.at(pos.row).at(pos.column));
+}
+
 board_t OthelloBoard::newBoard() const
 {
     board_t base;

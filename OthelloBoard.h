@@ -40,6 +40,7 @@ public:
     DiskCount getDiskCount()const;
     Disk getWinner()const;
     bool isFull()const;
+    Disk at(const Position& pos)const;
 
 private:
     board_t _board;
