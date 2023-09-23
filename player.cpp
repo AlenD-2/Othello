@@ -37,10 +37,11 @@ void Player::readPlayerName()
     emit playerReady();
 }
 
+// call it before program terminated
 void Player::killProcess()
 {
     _playerProcess->kill();
-    _playerProcess->waitForFinished(10000);
+    _playerProcess->waitForFinished();
 }
 
 void Player::readyToMove(QString board)

@@ -43,6 +43,12 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
     return result;
 }
 
+
+/*
+ * search given Direction of Position to check is it possible
+ * to swap opponent disks or not. if yes then return position
+ * of the same color disk(last disk in swap direction)
+ * return empty if not able swap */
 OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, OthelloBoard::Position currentPos, int dRow, int dCol, const OthelloBoard::Disk &color)
 {
     OthelloBoard::Position result;
@@ -67,6 +73,7 @@ OthelloBoard::Position OthelloLogic::checkDirection(const OthelloBoard &board, O
     }
     else
     {
+        // check the next disk in current direction
         return checkDirection(board, currentPos, dRow, dCol, color);
     }
 }
@@ -106,26 +113,24 @@ bool OthelloLogic::passTurn(const OthelloBoard &board, const OthelloBoard::Disk 
     return true;
 }
 
-OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk &color, const PositionList_t &positions)
+OthelloBoard OthelloLogic::swapDisks(OthelloBoard &board, OthelloBoard::Position sourcePos, const OthelloBoard::Disk &color, const PositionList_t &destinationList)
 {
-    int tempRow = currentPos.row;
-    int tempCol = currentPos.column;
-    for(const auto pos : positions)
+    auto tempPos = sourcePos;
+    for(const auto desPos : destinationList)
     {
         // find the directions (-1 or 0 or 1)
-        int dRow = (pos.row - currentPos.row == 0)? 0 : (pos.row - currentPos.row) / abs(pos.row - currentPos.row);
-        int dCol = (pos.column - currentPos.column == 0)? 0 : (pos.column - currentPos.column) / abs(pos.column - currentPos.column);
+        int dRow = (desPos.row - sourcePos.row == 0)? 0 : (desPos.row - sourcePos.row) / abs(desPos.row - sourcePos.row);
+        int dCol = (desPos.column - sourcePos.column == 0)? 0 : (desPos.column - sourcePos.column) / abs(desPos.column - sourcePos.column);
 
-        while(currentPos.row != pos.row || currentPos.column != pos.column)
+        while(sourcePos.row != desPos.row || sourcePos.column != desPos.column)
         {
-            board.setPointTo(currentPos, color);//board.at(row).at(column) = color;
-            currentPos.row += dRow;
-            currentPos.column += dCol;
+            board.setPointTo(sourcePos, color);
+            sourcePos.row += dRow;
+            sourcePos.column += dCol;
         }
 
         // restore main position for next swap
-        currentPos.row = tempRow;
-        currentPos.column = tempCol;
+        sourcePos = tempPos;
     }
     return board;
 }

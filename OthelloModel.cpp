@@ -12,10 +12,10 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     userPos.column = index%BOARD_SIZE;
 
     auto posList = _game.findOppPos(_board, userPos, color);
+    // is a valid move?
     if(!posList.empty())
     {
-        auto newBoard = _game.swapDisks(_board, userPos, color, posList);
-        _board = newBoard;
+        _board = _game.swapDisks(_board, userPos, color, posList);
         emit boardChanged();
         emit whiteCountChanged();
         emit blackCountChanged();
@@ -116,7 +116,6 @@ void OthelloModel::onPlayerReady()
     {
         _playersName.replace(0, _player1.getPlayerName());
         _playersName.replace(1, "Human");
-        qDebug()<<_playersName.at(1);
     }
     else
     {

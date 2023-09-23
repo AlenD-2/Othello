@@ -16,11 +16,11 @@ void OthelloBoard::setPointTo(Position position, Disk disk)
 QVector<int> OthelloBoard::toQVector() const
 {
     QVector<int> result;
-    for(const auto& i : _board)
+    for(const auto& row : _board)
     {
-        for(const auto& j : i)
+        for(const auto& disk : row)
         {
-            result.append(j);
+            result.append(disk);
         }
     }
 
@@ -30,11 +30,11 @@ QVector<int> OthelloBoard::toQVector() const
 QString OthelloBoard::toQString() const
 {
     QString result;
-    for(const auto& i : _board)
+    for(const auto& row : _board)
     {
-        for(const auto& j : i)
+        for(const auto& disk : row)
         {
-            result.append(QString::number(j));
+            result.append(QString::number(disk));
         }
     }
 
@@ -51,6 +51,8 @@ void OthelloBoard::setBoard(const board_t &board)
     _board = board;
 }
 
+/*
+ * calculate and return number of white and black */
 OthelloBoard::DiskCount OthelloBoard::getDiskCount() const
 {
     DiskCount result;
@@ -68,6 +70,8 @@ OthelloBoard::DiskCount OthelloBoard::getDiskCount() const
     return result;
 }
 
+/*
+ * return empty if black and white are equal */
 OthelloBoard::Disk OthelloBoard::getWinner() const
 {
     auto dc = getDiskCount();
@@ -106,15 +110,14 @@ OthelloBoard::Disk OthelloBoard::at(const Position &pos) const
     return static_cast<Disk>(_board.at(pos.row).at(pos.column));
 }
 
+/*
+ * return empty board with 4 disk in center */
 board_t OthelloBoard::newBoard() const
 {
     board_t base;
-    for(auto& i : base)
+    for(auto& row : base)
     {
-        for(auto& j : i)
-        {
-            j = Disk::empty;
-        }
+        std::fill(row.begin(), row.end(), Disk::empty);
     }
     base.at(3).at(3) = Disk::white;
     base.at(4).at(4) = Disk::white;

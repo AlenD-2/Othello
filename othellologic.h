@@ -15,7 +15,7 @@ public:
     OthelloLogic();
 
     PositionList_t findOppPos(const OthelloBoard& board, OthelloBoard::Position currentPos, const OthelloBoard::Disk& color);
-    OthelloBoard swapDisks(OthelloBoard &board, OthelloBoard::Position currentPos, const OthelloBoard::Disk& color, const PositionList_t& positions);
+    OthelloBoard swapDisks(OthelloBoard &board, OthelloBoard::Position sourcePos, const OthelloBoard::Disk& color, const PositionList_t& destinationList);
     bool isGameOver(const OthelloBoard& board);
     bool passTurn(const OthelloBoard& board, const OthelloBoard::Disk& color);
 
