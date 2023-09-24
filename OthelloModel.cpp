@@ -23,10 +23,12 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     }
     else
     {
-        if(_game.passTurn(_board, color))
-        {
-            exchangeTurn(_whosTurn);
-        }
+        // manage invalid move
+    }
+
+    if(_game.passTurn(_board, color))
+    {
+        exchangeTurn(_whosTurn);
     }
 
     if(_game.isGameOver(_board))
