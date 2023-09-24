@@ -44,12 +44,15 @@ void Player::killProcess()
     _playerProcess->waitForFinished();
 }
 
-void Player::readyToMove(QString board)
+void Player::readyToMove(QString board, OthelloBoard::Disk color)
 {
-    _playerProcess->write(board.toUtf8()+'\n');
-    _playerProcess->waitForReadyRead();
-    auto input = _playerProcess->readAllStandardOutput();
-    emit readyReadMove(input);
+    if(_color == color)
+    {
+        _playerProcess->write(board.toUtf8()+'\n');
+        _playerProcess->waitForReadyRead();
+        auto input = _playerProcess->readAllStandardOutput();
+        emit readyReadMove(input);
+    }
 }
 
 void Player::initProcess()

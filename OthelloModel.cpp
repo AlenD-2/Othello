@@ -40,7 +40,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     // if it's Ai turn in Human vs Code Mode
     if(_gameMode == Mode::HvC && _whosTurn == OthelloBoard::Disk::white)
     {
-        emit player1Move(_board.toQString());
+        emit startPlayerMove(_board.toQString(), _whosTurn);
     }
 }
 
@@ -49,7 +49,7 @@ void OthelloModel::setGameMode(int modeIndex)
     _gameMode = static_cast<Mode>(modeIndex);
     if(_gameMode == Mode::HvC)
     {
-        _player1.start(OthelloBoard::Disk::black);
+        _player1.start(OthelloBoard::Disk::white);
     }
     else if(_gameMode == Mode::CvC)
     {
@@ -66,8 +66,8 @@ OthelloModel::OthelloModel(QObject *parent)
 
     connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
-    connect(this, &OthelloModel::player1Move, &_player1, &Player::readyToMove);
-    connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayer1Move);
+    connect(this, &OthelloModel::startPlayerMove, &_player1, &Player::readyToMove);
+    connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
 }
 
 OthelloModel::~OthelloModel()
@@ -128,9 +128,13 @@ void OthelloModel::onPlayerReady()
     emit playersNameChanged();
 }
 
-void OthelloModel::readPlayer1Move(QString move)
+void OthelloModel::readPlayerMove(QString move)
 {
-    setPosTo(move.toInt(), OthelloBoard::Disk::white);
+    auto obj = sender();
+    if(obj == &_player1)
+    {
+        setPosTo(move.toInt(), OthelloBoard::Disk::white);
+    }
 }
 
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)

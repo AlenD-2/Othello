@@ -28,7 +28,7 @@ signals:
 public slots:
     void readPlayerName();
     void killProcess();
-    void readyToMove(QString board);
+    void readyToMove(QString board, OthelloBoard::Disk color);
 
 private:
     QThread _playerThread;
