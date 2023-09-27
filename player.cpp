@@ -29,7 +29,7 @@ QString Player::getPlayerName() const
 
 void Player::readPlayerName()
 {
-    // initialize Player process (allocate memmory and start process)
+    // initialize Player process (allocate memmory and start process and sent color)
     initProcess();
 
     _playerProcess->waitForReadyRead();
@@ -63,6 +63,12 @@ void Player::initProcess()
     if(!_playerProcess->waitForStarted())
     {
         qDebug()<<"Error: can't start the process";
+    }
+    else
+    {
+        // set the player color
+        QString color = QString::number(_color);
+        _playerProcess->write(color.toUtf8()+'\n');
     }
 }
 
