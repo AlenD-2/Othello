@@ -43,7 +43,10 @@ Rectangle {
             font.bold: true
             Layout.preferredHeight: btnHeight
             Layout.alignment: Qt.AlignHCenter
-            enabled: false
+            onClicked: {
+                othelloModel.setGameMode(2);
+                loader.source = "Loading.qml"
+            }
         }
     }
 }

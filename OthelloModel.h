@@ -65,6 +65,7 @@ private:
     Mode _gameMode;
 
     Player _player1;
+    Player _player2;
     QStringList _playersName{"",""};
 
     void exchangeTurn(OthelloBoard::Disk &disk);

@@ -42,6 +42,10 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     {
         emit startPlayerMove(_board.toQString(), _whosTurn);
     }
+    else if(_gameMode == Mode::CvC)
+    {
+        emit startPlayerMove(_board.toQString(), _whosTurn);
+    }
 }
 
 void OthelloModel::setGameMode(int modeIndex)
@@ -53,8 +57,8 @@ void OthelloModel::setGameMode(int modeIndex)
     }
     else if(_gameMode == Mode::CvC)
     {
-        _player1.start(OthelloBoard::Disk::black);
-//        _player2.start(OthelloBoard::Disk::black);
+        _player1.start(OthelloBoard::Disk::white);
+        _player2.start(OthelloBoard::Disk::black);
     }
 }
 
@@ -64,10 +68,16 @@ OthelloModel::OthelloModel(QObject *parent)
     _winner = static_cast<OthelloBoard::Disk>(GAME_IS_NOT_OVER);
     _whosTurn = OthelloBoard::Disk::black;
 
+    // player 1
     connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
     connect(this, &OthelloModel::startPlayerMove, &_player1, &Player::readyToMove);
     connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
+    // player 2
+    connect(&_player2, &Player::playerReady, this, &OthelloModel::onPlayerReady);
+    connect(this, &OthelloModel::programFinished, &_player2, &Player::killProcess);
+    connect(this, &OthelloModel::startPlayerMove, &_player2, &Player::readyToMove);
+    connect(&_player2, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
 }
 
 OthelloModel::~OthelloModel()
@@ -122,7 +132,7 @@ void OthelloModel::onPlayerReady()
     else
     {
         _playersName.replace(0, _player1.getPlayerName());
-//        _playersName.replace(1, _player2.getPlayerName();
+        _playersName.replace(1, _player2.getPlayerName());
     }
 
     emit playersNameChanged();
@@ -134,6 +144,10 @@ void OthelloModel::readPlayerMove(QString move)
     if(obj == &_player1)
     {
         setPosTo(move.toInt(), OthelloBoard::Disk::white);
+    }
+    else if (obj == &_player2)
+    {
+        setPosTo(move.toInt(), OthelloBoard::Disk::black);
     }
 }
 
