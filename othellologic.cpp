@@ -21,6 +21,8 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
         return result;
     }
 
+    OthelloBoard::Position checkPos;
+
     for(int dRow=-1 ; dRow<=1 ; dRow++)
     {
         for(int dCol=-1 ; dCol<=1 ; dCol++)
@@ -28,7 +30,9 @@ PositionList_t OthelloLogic::findOppPos(const OthelloBoard &board, OthelloBoard:
             if((currentPos.row+dRow) < BOARD_SIZE && (currentPos.row+dRow) >= 0 && (currentPos.column+dCol) < BOARD_SIZE && (currentPos.column+dCol) >= 0)
             {
                 // check at least one of Disks around position is not the same color
-                if(board.at(currentPos) != color)
+                checkPos.column = currentPos.column+dCol;
+                checkPos.row = currentPos.row+dRow;
+                if(board.at(checkPos) != color)
                 {
                     auto pos = checkDirection(board, currentPos, dRow, dCol, color);
                     if(!pos.isEmpty())
