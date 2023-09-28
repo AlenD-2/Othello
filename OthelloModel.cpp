@@ -35,6 +35,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     {
         _winner = _board.getWinner();
         emit winnerChanged();
+        return;
     }
 
     // if it's Ai turn in Human vs Code Mode
