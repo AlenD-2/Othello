@@ -20,6 +20,7 @@ public:
 
     void start(OthelloBoard::Disk color);
     QString getPlayerName()const;
+    OthelloBoard::Disk getColor()const;
 
 signals:
     void playerReady();

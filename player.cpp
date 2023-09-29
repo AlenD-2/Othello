@@ -27,6 +27,11 @@ QString Player::getPlayerName() const
     return _playerName;
 }
 
+OthelloBoard::Disk Othello::Player::getColor() const
+{
+    return _color;
+}
+
 void Player::readPlayerName()
 {
     // initialize Player process (allocate memmory and start process and sent color)

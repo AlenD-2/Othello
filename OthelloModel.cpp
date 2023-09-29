@@ -144,11 +144,11 @@ void OthelloModel::readPlayerMove(QString move)
     auto obj = sender();
     if(obj == &_player1)
     {
-        setPosTo(move.toInt(), OthelloBoard::Disk::white);
+        setPosTo(move.toInt(), _player1.getColor());
     }
     else if (obj == &_player2)
     {
-        setPosTo(move.toInt(), OthelloBoard::Disk::black);
+        setPosTo(move.toInt(), _player2.getColor());
     }
 }
 
