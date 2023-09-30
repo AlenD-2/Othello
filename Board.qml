@@ -50,18 +50,25 @@ Item {
                 color: "green"
                 border.width: 2
                 border.color: "black"
-                Rectangle{
-                    id: innerRect
-                    width: parent.width-20
-                    height: parent.height-20
-                    anchors.centerIn: parent
-                    color: (modelData === white)? "white" : "black"
-                    radius: width/2
-                    visible: modelData !== empty
+//                Rectangle{
+//                    id: innerRect
+//                    width: parent.width-20
+//                    height: parent.height-20
+//                    anchors.centerIn: parent
+//                    color: (modelData === white)? "white" : "black"
+//                    radius: width/2
+//                    visible: modelData !== empty
+//                }
+                Disk{
+                    id: disk
+                    anchors.fill: parent
+                    doFlip: true
                 }
+
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
+                        disk.doFlip = !disk.doFlip
                         othelloModel.setPosTo(index,othelloModel.whosTurn);
                     }
                 }
