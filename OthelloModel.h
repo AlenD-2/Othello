@@ -24,11 +24,13 @@ public:
     Q_PROPERTY(int blackCount READ blackCount /*WRITE setBlackCount*/ NOTIFY blackCountChanged);
     Q_PROPERTY(int winner READ winner /*WRITE setWinner*/ NOTIFY winnerChanged);
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
+    Q_PROPERTY(bool turnPassed READ turnPassed WRITE setTurnPassed NOTIFY turnPassedChanged FINAL);
 
     //players property
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
 
     Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
+    Q_INVOKABLE void nextTurn();
     Q_INVOKABLE void setGameMode(int modeIndex);
 
 public:
@@ -41,6 +43,7 @@ signals:
     void blackCountChanged();
     void winnerChanged();
     void whosTurnChanged();
+    void turnPassedChanged();
 
     void playersNameChanged();
     void programFinished();
@@ -52,6 +55,8 @@ public slots:
     int blackCount();
     int winner();
     int whosTurn();
+    bool turnPassed();
+    void setTurnPassed(bool value);
 
     QStringList playersName();
     void onPlayerReady();
@@ -63,6 +68,7 @@ private:
     OthelloBoard::Disk _winner;
     OthelloBoard::Disk _whosTurn;
     Mode _gameMode;
+    bool _turnPassed{false};
 
     Player _player1;
     Player _player2;

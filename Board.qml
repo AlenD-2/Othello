@@ -62,12 +62,7 @@ Item {
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        if(parent.modelData === empty)
-                            return
-                        else
-                        {
-                            othelloModel.setPosTo(index,othelloModel.whosTurn);
-                        }
+                        othelloModel.setPosTo(index,othelloModel.whosTurn);
                     }
                 }
             }
@@ -108,5 +103,9 @@ Item {
                 horizontalCenter: gameOverTxt.horizontalCenter
             }
         }
+    }
+
+    PassTrun{
+        passFlag: othelloModel.turnPassed
     }
 }

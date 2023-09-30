@@ -26,11 +26,6 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         // manage invalid move
     }
 
-    if(_game.passTurn(_board, _whosTurn))
-    {
-        exchangeTurn(_whosTurn);
-    }
-
     if(_game.isGameOver(_board))
     {
         _winner = _board.getWinner();
@@ -38,6 +33,22 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         return;
     }
 
+    if(_game.passTurn(_board, _whosTurn))
+    {
+        exchangeTurn(_whosTurn);
+        _turnPassed = true;
+        emit turnPassedChanged();
+    }
+    else
+    {
+        nextTurn();
+    }
+}
+
+/*
+ * note: in Human vs Human mode do nothing */
+void OthelloModel::nextTurn()
+{
     // if it's Ai turn in Human vs Code Mode
     if(_gameMode == Mode::HvC && _whosTurn == OthelloBoard::Disk::white)
     {
@@ -111,6 +122,16 @@ int OthelloModel::winner()
 int OthelloModel::whosTurn()
 {
     return _whosTurn;
+}
+
+bool OthelloModel::turnPassed()
+{
+    return _turnPassed;
+}
+
+void OthelloModel::setTurnPassed(bool value)
+{
+    _turnPassed = value;
 }
 
 QStringList OthelloModel::playersName()
