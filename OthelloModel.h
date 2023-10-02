@@ -25,7 +25,7 @@ public:
     Q_PROPERTY(int blackCount READ blackCount /*WRITE setBlackCount*/ NOTIFY blackCountChanged);
     Q_PROPERTY(int winner READ winner /*WRITE setWinner*/ NOTIFY winnerChanged);
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
-    Q_PROPERTY(bool turnPassed READ turnPassed WRITE setTurnPassed NOTIFY turnPassedChanged FINAL);
+    Q_PROPERTY(bool turnPassed READ turnPassed /*WRITE setTurnPassed*/ NOTIFY turnPassedChanged FINAL);
     Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
 
     //players property
@@ -60,7 +60,6 @@ public slots:
     int winner();
     int whosTurn();
     bool turnPassed();
-    void setTurnPassed(bool value);
     QVector<bool> swapList();
 
     QStringList playersName();

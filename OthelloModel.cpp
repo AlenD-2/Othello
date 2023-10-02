@@ -51,7 +51,9 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
  * note: in Human vs Human mode do nothing */
 void OthelloModel::nextTurn()
 {
-    exchangeTurn(_whosTurn);
+    // this function may called when turn passed so reset it to false (fix turnPass bug)
+    _turnPassed = false;
+    emit turnPassedChanged();
     // if it's Ai turn in Human vs Code Mode
     if(_gameMode == Mode::HvC && _whosTurn == OthelloBoard::Disk::white)
     {
@@ -143,11 +145,6 @@ int OthelloModel::whosTurn()
 bool OthelloModel::turnPassed()
 {
     return _turnPassed;
-}
-
-void OthelloModel::setTurnPassed(bool value)
-{
-    _turnPassed = value;
 }
 
 QVector<bool> OthelloModel::swapList()

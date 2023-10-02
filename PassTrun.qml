@@ -14,7 +14,6 @@ Rectangle{
         if(passFlag)
         {
             passAnime.start()
-            othelloModel.turnPassed = false
         }
     }
 
