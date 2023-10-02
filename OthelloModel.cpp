@@ -51,6 +51,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
  * note: in Human vs Human mode do nothing */
 void OthelloModel::nextTurn()
 {
+    exchangeTurn(_whosTurn);
     // if it's Ai turn in Human vs Code Mode
     if(_gameMode == Mode::HvC && _whosTurn == OthelloBoard::Disk::white)
     {
