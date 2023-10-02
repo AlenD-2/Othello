@@ -11,6 +11,7 @@ Item {
     property int playerCounter: 1
 
 
+
     Rectangle{
         id: countBoard
         width: root.width/4
@@ -50,25 +51,36 @@ Item {
                 color: "green"
                 border.width: 2
                 border.color: "black"
-//                Rectangle{
-//                    id: innerRect
-//                    width: parent.width-20
-//                    height: parent.height-20
-//                    anchors.centerIn: parent
-//                    color: (modelData === white)? "white" : "black"
-//                    radius: width/2
-//                    visible: modelData !== empty
-//                }
+                Rectangle{
+                    id: innerRect
+                    width: parent.width-20
+                    height: parent.height-20
+                    anchors.centerIn: parent
+                    color: (modelData === white)? "white" : "black"
+                    radius: width/2
+                    visible: modelData !== empty
+                    property int whiteCount: othelloModel.whiteCount
+                    onWhiteCountChanged: {
+                        if(othelloModel.swapList[index])
+                        {
+//                            console.log(modelData)
+                            innerRect.visible = false
+                            disk.frontCol = modelData
+                            disk.doFlip = !disk.doFlip
+                            disk.visible = true
+                        }
+                    }
+                }
                 Disk{
                     id: disk
                     anchors.fill: parent
-                    doFlip: true
+                    doFlip: false
+                    visible: false
                 }
 
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        disk.doFlip = !disk.doFlip
                         othelloModel.setPosTo(index,othelloModel.whosTurn);
                     }
                 }

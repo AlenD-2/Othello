@@ -16,6 +16,8 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     if(!posList.empty())
     {
         _board = _game.swapDisks(_board, userPos, color, posList);
+        _swapList.updateList(_board.getBoard());
+        emit swapListChanged();
         emit boardChanged();
         emit whiteCountChanged();
         emit blackCountChanged();
@@ -132,6 +134,11 @@ bool OthelloModel::turnPassed()
 void OthelloModel::setTurnPassed(bool value)
 {
     _turnPassed = value;
+}
+
+QVector<bool> OthelloModel::swapList()
+{
+    return _swapList.toQVector();
 }
 
 QStringList OthelloModel::playersName()

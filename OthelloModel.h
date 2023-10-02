@@ -4,6 +4,7 @@
 #include "OthelloBoard.h"
 #include "OthelloLogic.h"
 #include "Player.h"
+#include "SwapList.h"
 
 #include <QObject>
 #include <QVector>
@@ -25,6 +26,7 @@ public:
     Q_PROPERTY(int winner READ winner /*WRITE setWinner*/ NOTIFY winnerChanged);
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
     Q_PROPERTY(bool turnPassed READ turnPassed WRITE setTurnPassed NOTIFY turnPassedChanged FINAL);
+    Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
 
     //players property
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
@@ -44,6 +46,7 @@ signals:
     void winnerChanged();
     void whosTurnChanged();
     void turnPassedChanged();
+    void swapListChanged();
 
     void playersNameChanged();
     void programFinished();
@@ -57,6 +60,7 @@ public slots:
     int whosTurn();
     bool turnPassed();
     void setTurnPassed(bool value);
+    QVector<bool> swapList();
 
     QStringList playersName();
     void onPlayerReady();
@@ -69,6 +73,7 @@ private:
     OthelloBoard::Disk _whosTurn;
     Mode _gameMode;
     bool _turnPassed{false};
+    SwapList _swapList;
 
     Player _player1;
     Player _player2;

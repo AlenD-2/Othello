@@ -1,4 +1,5 @@
 #include "SwapList.h"
+#include "qdebug.h"
 
 #include <algorithm>
 
@@ -10,12 +11,16 @@ SwapList::SwapList()
     resetList();
 }
 
-void SwapList::updateList(PositionList_t posList)
+void SwapList::updateList(board_t board)
 {
-    for(const auto& pos : posList)
+    for(int i=0 ; i<BOARD_SIZE ; i++)
     {
-        _list.at((pos.row*BOARD_SIZE)+(pos.column)) = true;
+        for(int j=0 ; j<BOARD_SIZE ; j++)
+        {
+            _list.at((i*BOARD_SIZE)+j) = _oldBoard.getBoard().at(i).at(j) != board.at(i).at(j);
+        }
     }
+    _oldBoard.setBoard(board);
 }
 
 QVector<bool> SwapList::toQVector() const
@@ -30,7 +35,7 @@ QVector<bool> SwapList::toQVector() const
 
 void SwapList::resetList()
 {
-    std::generate(_list.begin(), _list.end(), false);
+    std::fill(_list.begin(), _list.end(), false);
 }
 
 }

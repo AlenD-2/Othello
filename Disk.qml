@@ -5,19 +5,20 @@ Flipable {
 
     property bool doFlip: false
     property bool flipped: false
+    property int frontCol: 1
 
     front: Rectangle{
         width: parent.width-20
         height: parent.height-20
         anchors.centerIn: parent
-        color: "white"
+        color: (frontCol === white)? "black" : "white"
         radius: width/2
     }
     back: Rectangle{
         width: parent.width-20
         height: parent.height-20
         anchors.centerIn: parent
-        color: "black"
+        color: (frontCol === white)? "white" : "black"
         radius: width/2
     }
 
@@ -36,7 +37,7 @@ Flipable {
     }
 
     transitions: Transition {
-        NumberAnimation { target: rotation; property: "angle"; duration: 4000 }
+        NumberAnimation { target: rotation; property: "angle"; duration: 1000 }
     }
 
     onDoFlipChanged: {
