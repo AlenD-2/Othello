@@ -12,7 +12,7 @@ class SwapList
 {
 public:
     SwapList();
-    void updateList(board_t board);
+    void updateList(const board_t& board, const OthelloBoard::Position& userPos);
     QVector<bool> toQVector()const;
 
 private:

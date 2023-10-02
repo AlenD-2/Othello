@@ -16,7 +16,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     if(!posList.empty())
     {
         _board = _game.swapDisks(_board, userPos, color, posList);
-        _swapList.updateList(_board.getBoard());
+        _swapList.updateList(_board.getBoard(), userPos);
         emit swapListChanged();
         emit boardChanged();
         emit whiteCountChanged();
