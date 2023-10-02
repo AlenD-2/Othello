@@ -46,7 +46,24 @@ Rectangle {
         }
     }
 
+    SpinBox{
+        id: delaySpin
+        height: 30
+        width: 70
+        anchors{
+            bottom: startBtn.top
+            horizontalCenter: startBtn.horizontalCenter
+            bottomMargin: 30
+        }
+        value: 1000
+        from: 0
+        to: 10000
+        stepSize: 100
+        editable: true
+    }
+
     Button{
+        id: startBtn
         text: "Start"
         width: 100
         height: 60
@@ -58,6 +75,8 @@ Rectangle {
         enabled: txt2.text !== "" || txt1.text !== ""
         onClicked: {
             loader.source = "Board.qml"
+            othelloModel.setAiDelay(delaySpin.value)
+            root.aiDelayValue = (delaySpin.value > 100)? (delaySpin.value-100) : 0
         }
     }
 }

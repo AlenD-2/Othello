@@ -21,6 +21,7 @@ public:
     void start(OthelloBoard::Disk color);
     QString getPlayerName()const;
     OthelloBoard::Disk getColor()const;
+    void setDelay(int miliSec);
 
 signals:
     void playerReady();
@@ -36,6 +37,7 @@ private:
     std::unique_ptr<QProcess> _playerProcess;
     QString _playerName;
     OthelloBoard::Disk _color;
+    int _delay{1000};
 
     //functions
     void initProcess();

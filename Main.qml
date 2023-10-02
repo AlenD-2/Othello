@@ -11,6 +11,8 @@ Window {
     visible: true
     title: qsTr("Othello")
 
+    property int aiDelayValue: 1000
+
     OthelloModel{
         id: othelloModel
     }

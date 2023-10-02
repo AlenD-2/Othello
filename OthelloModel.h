@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
     Q_INVOKABLE void nextTurn();
     Q_INVOKABLE void setGameMode(int modeIndex);
+    Q_INVOKABLE void setAiDelay(int miliSec);
 
 public:
     explicit OthelloModel(QObject *parent = nullptr);

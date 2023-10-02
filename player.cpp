@@ -32,6 +32,11 @@ OthelloBoard::Disk Othello::Player::getColor() const
     return _color;
 }
 
+void Othello::Player::setDelay(int miliSec)
+{
+    _delay = miliSec;
+}
+
 void Player::readPlayerName()
 {
     // initialize Player process (allocate memmory and start process and sent color)
@@ -53,6 +58,7 @@ void Player::readyToMove(QString board, OthelloBoard::Disk color)
 {
     if(_color == color)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(_delay));
         _playerProcess->write(board.toUtf8()+'\n');
         _playerProcess->waitForReadyRead();
         auto input = _playerProcess->readAllStandardOutput();

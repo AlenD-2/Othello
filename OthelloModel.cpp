@@ -76,6 +76,19 @@ void OthelloModel::setGameMode(int modeIndex)
     }
 }
 
+void OthelloModel::setAiDelay(int miliSec)
+{
+    if(_gameMode == Mode::HvC)
+    {
+        _player1.setDelay(miliSec);
+    }
+    else if(_gameMode == Mode::CvC)
+    {
+        _player1.setDelay(miliSec);
+        _player2.setDelay(miliSec);
+    }
+}
+
 OthelloModel::OthelloModel(QObject *parent)
     : QObject{parent}
 {
