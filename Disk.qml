@@ -37,7 +37,12 @@ Flipable {
     }
 
     transitions: Transition {
-        NumberAnimation { target: rotation; property: "angle"; duration: root.aiDelayValue }
+        NumberAnimation {
+            target: rotation;
+            property: "angle";
+            duration: root.aiDelayValue
+            easing.type: Easing.OutQuart
+        }
     }
 
     onDoFlipChanged: {
