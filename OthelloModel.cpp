@@ -103,11 +103,15 @@ OthelloModel::OthelloModel(QObject *parent)
     connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
     connect(this, &OthelloModel::startPlayerMove, &_player1, &Player::readyToMove);
     connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
+    connect(&_player1, &Player::pauseTimer, this, &OthelloModel::onTimerPaused);
+    connect(&_player1, &Player::resumeTimer, this, &OthelloModel::onTimerResumed);
     // player 2
     connect(&_player2, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player2, &Player::killProcess);
     connect(this, &OthelloModel::startPlayerMove, &_player2, &Player::readyToMove);
     connect(&_player2, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
+    connect(&_player2, &Player::pauseTimer, this, &OthelloModel::onTimerPaused);
+    connect(&_player2, &Player::resumeTimer, this, &OthelloModel::onTimerResumed);
 }
 
 OthelloModel::~OthelloModel()
@@ -152,6 +156,16 @@ QVector<bool> OthelloModel::swapList()
     return _swapList.toQVector();
 }
 
+bool OthelloModel::player1TimerPaused()
+{
+    return _player1TimerPaused;
+}
+
+bool OthelloModel::player2TimerPaused()
+{
+    return _player2TimerPaused;
+}
+
 QStringList OthelloModel::playersName()
 {
     return _playersName;
@@ -188,6 +202,36 @@ void OthelloModel::readPlayerMove(QString move)
     else if (obj == &_player2)
     {
         setPosTo(move.toInt(), _player2.getColor());
+    }
+}
+
+void OthelloModel::onTimerResumed()
+{
+    auto obj = sender();
+    if(obj == &_player1)
+    {
+        _player1TimerPaused = false;
+        emit player1TimerPausedChanged();
+    }
+    else if (obj == &_player2)
+    {
+        _player2TimerPaused = false;
+        emit player2TimerPausedChanged();
+    }
+}
+
+void OthelloModel::onTimerPaused()
+{
+    auto obj = sender();
+    if(obj == &_player1)
+    {
+        _player1TimerPaused = true;
+        emit player1TimerPausedChanged();
+    }
+    else if (obj == &_player2)
+    {
+        _player2TimerPaused = true;
+        emit player2TimerPausedChanged();
     }
 }
 

@@ -27,6 +27,8 @@ public:
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
     Q_PROPERTY(bool turnPassed READ turnPassed /*WRITE setTurnPassed*/ NOTIFY turnPassedChanged FINAL);
     Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
+    Q_PROPERTY(bool player1TimerPaused READ player1TimerPaused /*WRITE setPlayer1TimerPaused*/ NOTIFY player1TimerPausedChanged FINAL);
+    Q_PROPERTY(bool player2TimerPaused READ player2TimerPaused /*WRITE setPlayer2TimerPaused*/ NOTIFY player2TimerPausedChanged FINAL);
 
     //players property
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
@@ -48,6 +50,8 @@ signals:
     void whosTurnChanged();
     void turnPassedChanged();
     void swapListChanged();
+    void player1TimerPausedChanged();
+    void player2TimerPausedChanged();
 
     void playersNameChanged();
     void programFinished();
@@ -61,10 +65,14 @@ public slots:
     int whosTurn();
     bool turnPassed();
     QVector<bool> swapList();
+    bool player1TimerPaused();
+    bool player2TimerPaused();
 
     QStringList playersName();
     void onPlayerReady();
     void readPlayerMove(QString move);
+    void onTimerResumed();
+    void onTimerPaused();
 
 private:
     OthelloBoard _board;
@@ -74,6 +82,8 @@ private:
     Mode _gameMode;
     bool _turnPassed{false};
     SwapList _swapList;
+    bool _player1TimerPaused{true};
+    bool _player2TimerPaused{true};
 
     Player _player1;
     Player _player2;

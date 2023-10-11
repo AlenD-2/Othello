@@ -10,7 +10,18 @@ Item {
 
     property int playerCounter: 1
 
-
+    Column{
+        PTimer{
+            width: 50
+            height: 20
+            pauseTimer: othelloModel.player1TimerPaused
+        }
+        PTimer{
+            width: 50
+            height: 20
+            pauseTimer: othelloModel.player2TimerPaused
+        }
+    }
 
     Rectangle{
         id: countBoard

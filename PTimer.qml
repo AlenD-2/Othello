@@ -3,7 +3,7 @@ import QtQuick
 Item {
     id: timer
     property int initTime: 90
-    property bool pauseTimer: true
+    property bool pauseTimer: false
 
     onPauseTimerChanged: {
         if(pauseTimer)

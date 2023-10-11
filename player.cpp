@@ -15,7 +15,7 @@ Player::~Player()
     _playerThread.wait();
 }
 
-void Othello::Player::start(OthelloBoard::Disk color)
+void Player::start(OthelloBoard::Disk color)
 {
     _color = color;
     this->moveToThread(&_playerThread);
@@ -27,12 +27,12 @@ QString Player::getPlayerName() const
     return _playerName;
 }
 
-OthelloBoard::Disk Othello::Player::getColor() const
+OthelloBoard::Disk Player::getColor() const
 {
     return _color;
 }
 
-void Othello::Player::setDelay(int miliSec)
+void Player::setDelay(int miliSec)
 {
     _delay = miliSec;
 }
@@ -60,7 +60,9 @@ void Player::readyToMove(QString board, OthelloBoard::Disk color)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(_delay));
         _playerProcess->write(board.toUtf8()+'\n');
+        emit resumeTimer();
         _playerProcess->waitForReadyRead();
+        emit pauseTimer();
         auto input = _playerProcess->readAllStandardOutput();
         emit readyReadMove(input);
     }
