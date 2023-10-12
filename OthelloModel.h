@@ -27,6 +27,7 @@ public:
     Q_PROPERTY(int whosTurn READ whosTurn /*WRITE setWhosTurn*/ NOTIFY whosTurnChanged);
     Q_PROPERTY(bool turnPassed READ turnPassed /*WRITE setTurnPassed*/ NOTIFY turnPassedChanged FINAL);
     Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
+    Q_PROPERTY(int invalidPos READ invalidPos /*WRITE setInvalidPos*/ NOTIFY invalidPosChanged FINAL);
     Q_PROPERTY(bool player1TimerPaused READ player1TimerPaused /*WRITE setPlayer1TimerPaused*/ NOTIFY player1TimerPausedChanged FINAL);
     Q_PROPERTY(bool player2TimerPaused READ player2TimerPaused /*WRITE setPlayer2TimerPaused*/ NOTIFY player2TimerPausedChanged FINAL);
 
@@ -50,6 +51,7 @@ signals:
     void whosTurnChanged();
     void turnPassedChanged();
     void swapListChanged();
+    void invalidPosChanged();
     void player1TimerPausedChanged();
     void player2TimerPausedChanged();
 
@@ -65,6 +67,7 @@ public slots:
     int whosTurn();
     bool turnPassed();
     QVector<bool> swapList();
+    int invalidPos();
     bool player1TimerPaused();
     bool player2TimerPaused();
 
@@ -82,6 +85,7 @@ private:
     Mode _gameMode;
     bool _turnPassed{false};
     SwapList _swapList;
+    int _invalidPos{-1};
     bool _player1TimerPaused{true};
     bool _player2TimerPaused{true};
 

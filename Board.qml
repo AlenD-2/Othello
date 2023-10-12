@@ -59,8 +59,8 @@ Item {
             delegate: Rectangle{
                 width: gridViewArea.width/8
                 height: gridViewArea.height/8
-                color: "green"
-                border.width: 2
+                color: (othelloModel.invalidPos === index)? "red" : "green"
+                border.width: 1
                 border.color: "black"
                 Rectangle{
                     id: innerRect

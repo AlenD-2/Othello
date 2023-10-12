@@ -15,6 +15,9 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     // is a valid move?
     if(!posList.empty())
     {
+        _invalidPos = -1; // set as valid move
+        emit invalidPosChanged();
+
         _board = _game.swapDisks(_board, userPos, color, posList);
         _swapList.updateList(_board.getBoard(), userPos);
         emit swapListChanged();
@@ -26,6 +29,8 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     else
     {
         // manage invalid move
+        _invalidPos = index;
+        emit invalidPosChanged();
     }
 
     if(_game.isGameOver(_board))
@@ -154,6 +159,11 @@ bool OthelloModel::turnPassed()
 QVector<bool> OthelloModel::swapList()
 {
     return _swapList.toQVector();
+}
+
+int OthelloModel::invalidPos()
+{
+    return _invalidPos;
 }
 
 bool OthelloModel::player1TimerPaused()
