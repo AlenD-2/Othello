@@ -7,19 +7,19 @@ Flipable {
     property bool flipped: false
     property int frontCol: 1
 
-    front: Rectangle{
+    front: Image{
         width: parent.width-20
         height: parent.height-20
         anchors.centerIn: parent
-        color: (frontCol === white)? "black" : "white"
-        radius: width/2
+        source: (frontCol === white)? "/img/image/black disk.png" : "/img/image/white disk.png"
+        antialiasing: true
     }
-    back: Rectangle{
+    back: Image{
         width: parent.width-20
         height: parent.height-20
         anchors.centerIn: parent
-        color: (frontCol === white)? "white" : "black"
-        radius: width/2
+        source: (frontCol === white)? "/img/image/white disk.png" : "/img/image/black disk.png"
+        antialiasing: true
     }
 
     transform: Rotation {

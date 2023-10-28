@@ -62,14 +62,14 @@ Item {
                 color: (othelloModel.invalidPos === index)? "red" : "green"
                 border.width: 1
                 border.color: "black"
-                Rectangle{
+                Image{
                     id: innerRect
                     width: parent.width-20
                     height: parent.height-20
                     anchors.centerIn: parent
-                    color: (modelData === white)? "white" : "black"
-                    radius: width/2
+                    source: (modelData === white)? "/img/image/white disk.png" : "/img/image/black disk.png"
                     visible: modelData !== empty
+                    antialiasing: true
                     property int whiteCount: othelloModel.whiteCount
                     onWhiteCountChanged: {
                         if(othelloModel.swapList[index])
