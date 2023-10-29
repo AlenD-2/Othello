@@ -44,6 +44,8 @@ void Player::readPlayerName()
 
     _playerProcess->waitForReadyRead();
     _playerName = _playerProcess->readAllStandardOutput();
+    _playerName = _playerName.remove('\r');
+    _playerName = _playerName.remove('\n');
     emit playerReady();
 }
 
