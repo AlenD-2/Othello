@@ -73,11 +73,16 @@ void OthelloModel::nextTurn()
 void OthelloModel::setGameMode(int modeIndex)
 {
     _gameMode = static_cast<Mode>(modeIndex);
-    if(_gameMode == Mode::HvC)
+    if(_gameMode == Mode::HvH)
+    {
+        _playersName.replace(0, "Human");
+        _playersName.replace(1, "Human");
+    }
+    else if(_gameMode == Mode::HvC)
     {
         _player1.start(OthelloBoard::Disk::white);
     }
-    else if(_gameMode == Mode::CvC)
+    else //Mode::CvC
     {
         _player1.start(OthelloBoard::Disk::white);
         _player2.start(OthelloBoard::Disk::black);
@@ -183,17 +188,12 @@ QStringList OthelloModel::playersName()
 
 void OthelloModel::onPlayerReady()
 {
-    if(_gameMode == Mode::HvH)
-    {
-        _playersName.replace(0, "Human");
-        _playersName.replace(1, "Human");
-    }
-    else if(_gameMode == Mode::HvC)
+    if(_gameMode == Mode::HvC)
     {
         _playersName.replace(0, _player1.getPlayerName());
         _playersName.replace(1, "Human");
     }
-    else
+    else // Mode::CvC
     {
         _playersName.replace(0, _player1.getPlayerName());
         _playersName.replace(1, _player2.getPlayerName());
