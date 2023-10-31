@@ -5,7 +5,6 @@ Rectangle{
     width: 340
     height: 150
     opacity: 0.85
-    anchors.centerIn: parent
     visible: false
     border.width: 2
 

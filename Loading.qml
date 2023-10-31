@@ -74,7 +74,7 @@ Rectangle {
         }
         enabled: txt2.text !== "" || txt1.text !== ""
         onClicked: {
-            loader.source = "Board.qml"
+            loader.source = "GamePage.qml"
             othelloModel.setAiDelay(delaySpin.value)
             root.aiDelayValue = (delaySpin.value > 100)? (delaySpin.value-100) : 0
         }

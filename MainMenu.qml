@@ -23,7 +23,7 @@ Rectangle {
             Layout.alignment: Qt.AlignHCenter
             onClicked:{
                 othelloModel.setGameMode(0);
-                loader.source = "Board.qml"
+                loader.source = "Loading.qml"
             }
         }
         Button{
