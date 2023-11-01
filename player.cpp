@@ -52,8 +52,11 @@ void Player::readPlayerName()
 // call it before program terminated
 void Player::killProcess()
 {
-    _playerProcess->kill();
-    _playerProcess->waitForFinished();
+    if(_playerProcess != nullptr)
+    {
+        _playerProcess->kill();
+        _playerProcess->waitForFinished();
+    }
 }
 
 void Player::readyToMove(QString board, OthelloBoard::Disk color)
