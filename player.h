@@ -40,9 +40,12 @@ private:
     QString _playerName;
     OthelloBoard::Disk _color;
     int _delay{1000};
+    bool _isFunctional{false};
 
     //functions
     void initProcess();
+    QString _funcPlayerName()const;
+    QString _playerFunc(const QString& board, int color);
 };
 
 }

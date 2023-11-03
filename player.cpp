@@ -39,6 +39,12 @@ void Player::setDelay(int miliSec)
 
 void Player::readPlayerName()
 {
+    if(_isFunctional)
+    {
+        _playerName = _funcPlayerName();
+        emit playerReady();
+        return;
+    }
     // initialize Player process (allocate memmory and start process and sent color)
     initProcess();
 
@@ -52,21 +58,34 @@ void Player::readPlayerName()
 // call it before program terminated
 void Player::killProcess()
 {
-    _playerProcess->kill();
-    _playerProcess->waitForFinished();
+    if(_playerProcess != nullptr && _playerProcess->state() == QProcess::Running)
+    {
+        _playerProcess->kill();
+        _playerProcess->waitForFinished();
+    }
 }
 
 void Player::readyToMove(QString board, OthelloBoard::Disk color)
 {
     if(_color == color)
     {
+        QString result{};
+        // wait until disk swap finished
         std::this_thread::sleep_for(std::chrono::milliseconds(_delay));
-        _playerProcess->write(board.toUtf8()+'\n');
+
         emit resumeTimer();
-        _playerProcess->waitForReadyRead();
+        if(_isFunctional)
+        {
+            result = _playerFunc(board, color);
+        }
+        else
+        {
+            _playerProcess->write(board.toUtf8()+'\n');
+            _playerProcess->waitForReadyRead();
+            result = _playerProcess->readAllStandardOutput();
+        }
         emit pauseTimer();
-        auto input = _playerProcess->readAllStandardOutput();
-        emit readyReadMove(input);
+        emit readyReadMove(result);
     }
 }
 
@@ -85,6 +104,17 @@ void Player::initProcess()
         QString color = QString::number(_color);
         _playerProcess->write(color.toUtf8()+'\n');
     }
+}
+
+QString Othello::Player::_funcPlayerName() const
+{
+    return "PlayerName";
+}
+
+QString Player::_playerFunc(const QString &board, int color)
+{
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    return "26";
 }
 
 }
