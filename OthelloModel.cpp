@@ -60,7 +60,7 @@ void OthelloModel::nextTurn()
     _turnPassed = false;
     emit turnPassedChanged();
     // if it's Ai turn in Human vs Code Mode
-    if(_gameMode == Mode::HvC && _whosTurn == OthelloBoard::Disk::white)
+    if(_gameMode == Mode::HvC && _whosTurn == _player1.getColor())
     {
         emit startPlayerMove(_board.toQString(), _whosTurn);
     }
@@ -80,12 +80,12 @@ void OthelloModel::setGameMode(int modeIndex)
     }
     else if(_gameMode == Mode::HvC)
     {
-        _player1.start(OthelloBoard::Disk::white);
+        _player1.start(OthelloBoard::Disk::black);
     }
     else //Mode::CvC
     {
-        _player1.start(OthelloBoard::Disk::white);
-        _player2.start(OthelloBoard::Disk::black);
+        _player1.start(OthelloBoard::Disk::black);
+        _player2.start(OthelloBoard::Disk::white);
     }
 }
 
