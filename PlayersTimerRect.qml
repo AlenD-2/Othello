@@ -29,10 +29,22 @@ Rectangle {
                     font.pointSize: txtSize
                 }
             }
-            Rectangle{
-                height: 20
-                Layout.fillWidth: true
-                radius: 10
+            RowLayout{
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
             }
         }
         ColumnLayout{
@@ -49,10 +61,22 @@ Rectangle {
                     font.pointSize: txtSize
                 }
             }
-            Rectangle{
-                height: 20
-                Layout.fillWidth: true
-                radius: 10
+            RowLayout{
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
+                Rectangle{
+                    height: 20
+                    Layout.fillWidth: true
+                    radius: 10
+                }
             }
         }
     }
