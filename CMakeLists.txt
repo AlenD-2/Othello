@@ -16,6 +16,7 @@ qt_add_executable(appOthello
     Player.h Player.cpp
     OthelloLogic.h OthelloLogic.cpp
     SwapList.h SwapList.cpp
+    Timer.h Timer.cpp
 
     images.qrc
 )
