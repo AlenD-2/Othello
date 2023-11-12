@@ -19,10 +19,12 @@ private:
     int _remainSeconds{1000};
 };
 
-class Timer : QObject
+class Timer : public QObject
 {
+    Q_OBJECT
 public:
-    Timer();
+    explicit Timer();
+    ~Timer();
 
     void start();
     void stop();

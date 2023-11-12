@@ -9,6 +9,11 @@ Timer::Timer()
     connect(_timer, &QTimer::timeout, this, &Timer::updateTime);
 }
 
+Timer::~Timer()
+{
+
+}
+
 void Timer::start()
 {
     _timer->start(1000);
