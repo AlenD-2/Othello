@@ -73,7 +73,7 @@ void Player::readyToMove(QString board, OthelloBoard::Disk color)
         // wait until disk swap finished
         std::this_thread::sleep_for(std::chrono::milliseconds(_delay));
 
-        emit resumeTimer();
+        emit playerProcessStarted();
         if(_isFunctional)
         {
             result = _playerFunc(board, color);
@@ -84,7 +84,7 @@ void Player::readyToMove(QString board, OthelloBoard::Disk color)
             _playerProcess->waitForReadyRead();
             result = _playerProcess->readAllStandardOutput();
         }
-        emit pauseTimer();
+        emit playerProcessStoped();
         emit readyReadMove(result);
     }
 }
@@ -106,11 +106,17 @@ void Player::initProcess()
     }
 }
 
+/*
+ * this function is for name of the players who use function instead of process
+ */
 QString Othello::Player::_funcPlayerName() const
 {
     return "PlayerName";
 }
 
+/*
+ * this function is for code of the players who use function instead of process
+ */
 QString Player::_playerFunc(const QString &board, int color)
 {
     std::this_thread::sleep_for(std::chrono::seconds(2));

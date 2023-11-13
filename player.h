@@ -26,8 +26,8 @@ public:
 signals:
     void playerReady();
     void readyReadMove(QString move);
-    void pauseTimer();
-    void resumeTimer();
+    void playerProcessStarted();
+    void playerProcessStoped();
 
 public slots:
     void readPlayerName();
