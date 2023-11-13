@@ -48,10 +48,10 @@ Item {
                 Layout.rightMargin: 80
                 Layout.bottomMargin: 50
                 txtSize: 35
-                player1Name: "Player1"
-                player2Name: "Player2"
-                player1Time: "1:00"
-                player2Time: "2:00"
+                player1Name: othelloModel.playersName[0]
+                player2Name: othelloModel.playersName[1]
+                player1Time: othelloModel.player1Time
+                player2Time: othelloModel.player2Time
             }
         }
     }

@@ -108,20 +108,25 @@ OthelloModel::OthelloModel(QObject *parent)
     _winner = static_cast<OthelloBoard::Disk>(GAME_IS_NOT_OVER);
     _whosTurn = OthelloBoard::Disk::black;
 
+    _player1Timer = new Timer(this);
+    _player2Timer = new Timer(this);
+
     // player 1
     connect(&_player1, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player1, &Player::killProcess);
     connect(this, &OthelloModel::startPlayerMove, &_player1, &Player::readyToMove);
     connect(&_player1, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
-    connect(&_player1, &Player::pauseTimer, this, &OthelloModel::onTimerPaused);
-    connect(&_player1, &Player::resumeTimer, this, &OthelloModel::onTimerResumed);
+    connect(&_player1, &Player::playerProcessStarted, _player1Timer, &Timer::start);
+    connect(&_player1, &Player::playerProcessStoped, _player1Timer, &Timer::stop);
+    connect(_player1Timer, &Timer::timeChanged, this, &OthelloModel::onTimerChanged);
     // player 2
     connect(&_player2, &Player::playerReady, this, &OthelloModel::onPlayerReady);
     connect(this, &OthelloModel::programFinished, &_player2, &Player::killProcess);
     connect(this, &OthelloModel::startPlayerMove, &_player2, &Player::readyToMove);
     connect(&_player2, &Player::readyReadMove, this, &OthelloModel::readPlayerMove);
-    connect(&_player2, &Player::pauseTimer, this, &OthelloModel::onTimerPaused);
-    connect(&_player2, &Player::resumeTimer, this, &OthelloModel::onTimerResumed);
+    connect(&_player2, &Player::playerProcessStarted, _player2Timer, &Timer::start);
+    connect(&_player2, &Player::playerProcessStoped, _player2Timer, &Timer::stop);
+    connect(_player2Timer, &Timer::timeChanged, this, &OthelloModel::onTimerChanged);
 }
 
 OthelloModel::~OthelloModel()
@@ -171,14 +176,14 @@ int OthelloModel::invalidPos()
     return _invalidPos;
 }
 
-bool OthelloModel::player1TimerPaused()
+QString OthelloModel::player1Time()
 {
-    return _player1TimerPaused;
+    return _player1Timer->remainTime().toQString();
 }
 
-bool OthelloModel::player2TimerPaused()
+QString OthelloModel::player2Time()
 {
-    return _player2TimerPaused;
+    return _player2Timer->remainTime().toQString();
 }
 
 QStringList OthelloModel::playersName()
@@ -215,35 +220,20 @@ void OthelloModel::readPlayerMove(QString move)
     }
 }
 
-void OthelloModel::onTimerResumed()
+void OthelloModel::onTimerChanged()
 {
     auto obj = sender();
-    if(obj == &_player1)
+    if(obj == _player1Timer)
     {
-        _player1TimerPaused = false;
-        emit player1TimerPausedChanged();
+        emit player1TimeChanged();
     }
-    else if (obj == &_player2)
+    else if(obj == _player2Timer)
     {
-        _player2TimerPaused = false;
-        emit player2TimerPausedChanged();
+        emit player2TimeChanged();
     }
 }
 
-void OthelloModel::onTimerPaused()
-{
-    auto obj = sender();
-    if(obj == &_player1)
-    {
-        _player1TimerPaused = true;
-        emit player1TimerPausedChanged();
-    }
-    else if (obj == &_player2)
-    {
-        _player2TimerPaused = true;
-        emit player2TimerPausedChanged();
-    }
-}
+
 
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)
 {

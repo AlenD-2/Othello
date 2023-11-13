@@ -5,6 +5,7 @@
 #include "OthelloLogic.h"
 #include "Player.h"
 #include "SwapList.h"
+#include "Timer.h"
 
 #include <QObject>
 #include <QVector>
@@ -28,8 +29,8 @@ public:
     Q_PROPERTY(bool turnPassed READ turnPassed /*WRITE setTurnPassed*/ NOTIFY turnPassedChanged FINAL);
     Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
     Q_PROPERTY(int invalidPos READ invalidPos /*WRITE setInvalidPos*/ NOTIFY invalidPosChanged FINAL);
-    Q_PROPERTY(bool player1TimerPaused READ player1TimerPaused /*WRITE setPlayer1TimerPaused*/ NOTIFY player1TimerPausedChanged FINAL);
-    Q_PROPERTY(bool player2TimerPaused READ player2TimerPaused /*WRITE setPlayer2TimerPaused*/ NOTIFY player2TimerPausedChanged FINAL);
+    Q_PROPERTY(QString player1Time READ player1Time /*WRITE setPlayer1Time*/ NOTIFY player1TimeChanged FINAL);
+    Q_PROPERTY(QString player2Time READ player2Time /*WRITE setPlayer2Time*/ NOTIFY player2TimeChanged FINAL);
 
     //players property
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
@@ -52,8 +53,8 @@ signals:
     void turnPassedChanged();
     void swapListChanged();
     void invalidPosChanged();
-    void player1TimerPausedChanged();
-    void player2TimerPausedChanged();
+    void player1TimeChanged();
+    void player2TimeChanged();
 
     void playersNameChanged();
     void programFinished();
@@ -68,14 +69,13 @@ public slots:
     bool turnPassed();
     QVector<bool> swapList();
     int invalidPos();
-    bool player1TimerPaused();
-    bool player2TimerPaused();
+    QString player1Time();
+    QString player2Time();
 
     QStringList playersName();
     void onPlayerReady();
     void readPlayerMove(QString move);
-    void onTimerResumed();
-    void onTimerPaused();
+    void onTimerChanged();
 
 private:
     OthelloBoard _board;
@@ -86,12 +86,13 @@ private:
     bool _turnPassed{false};
     SwapList _swapList;
     int _invalidPos{-1};
-    bool _player1TimerPaused{true};
-    bool _player2TimerPaused{true};
 
     Player _player1;
     Player _player2;
     QStringList _playersName{"",""};
+
+    Timer* _player1Timer;
+    Timer* _player2Timer;
 
     void exchangeTurn(OthelloBoard::Disk &disk);
 };
