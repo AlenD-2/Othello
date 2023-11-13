@@ -16,22 +16,22 @@ public:
     RemainTime operator--(int);
 
 private:
-    int _remainSeconds{1000};
+    int _remainSeconds{90};
 };
 
 class Timer : public QObject
 {
     Q_OBJECT
 public:
-    explicit Timer();
+    explicit Timer(QObject *parent = nullptr);
     ~Timer();
 
-    void start();
-    void stop();
     RemainTime remainTime()const;
 
 public slots:
     void updateTime();
+    void start();
+    void stop();
 
 signals:
     void timeChanged();

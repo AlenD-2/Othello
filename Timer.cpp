@@ -3,15 +3,15 @@
 namespace Othello {
 
 
-Timer::Timer()
+Timer::Timer(QObject *parent)
 {
-    _timer = new QTimer(this);
+    _timer = new QTimer(parent);
     connect(_timer, &QTimer::timeout, this, &Timer::updateTime);
 }
 
 Timer::~Timer()
 {
-
+    _timer->stop();
 }
 
 void Timer::start()
@@ -34,6 +34,11 @@ void Timer::updateTime()
     _remainTime--;
     emit timeChanged();
 }
+
+
+
+//////// RemainTime Class /////////
+
 
 RemainTime::RemainTime()
 {
