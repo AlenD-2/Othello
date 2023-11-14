@@ -3,7 +3,7 @@
 namespace Othello {
 
 
-Timer::Timer(QObject *parent)
+Timer::Timer(QObject *parent) : QObject{parent}
 {
     _timer = new QTimer(parent);
     connect(_timer, &QTimer::timeout, this, &Timer::updateTime);
