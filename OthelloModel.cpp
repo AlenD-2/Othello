@@ -7,6 +7,11 @@ namespace Othello {
 
 void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
 {
+    if(color != _whosTurn)
+    {
+        return;
+    }
+
     OthelloBoard::Position userPos;
     userPos.row = index/BOARD_SIZE;
     userPos.column = index%BOARD_SIZE;
