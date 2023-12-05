@@ -22,6 +22,7 @@ void Timer::start()
 void Timer::stop()
 {
     _remainTime.DecRemainTime(_timer->remainingTime());
+    emit timeChanged();
     _timer->stop();
 }
 
