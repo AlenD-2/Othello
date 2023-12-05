@@ -7,7 +7,7 @@ namespace Othello {
 
 void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
 {
-    if(color != _whosTurn)
+    if(color != _whosTurn || _earlyGameOver)
     {
         return;
     }
@@ -64,6 +64,13 @@ void OthelloModel::nextTurn()
     // this function may called when turn passed so reset it to false (fix turnPass bug)
     _turnPassed = false;
     emit turnPassedChanged();
+
+    // if game is over earlier cause one of players is timeout or out of chance
+    if(_earlyGameOver)
+    {
+        return;
+    }
+
     // if it's Ai turn in Human vs Code Mode
     if(_gameMode == Mode::HvC && _whosTurn == _player1.getColor())
     {
@@ -225,15 +232,29 @@ void OthelloModel::readPlayerMove(QString move)
     }
 }
 
+/*
+ * update the timer and check if the player is out of time*/
 void OthelloModel::onTimerChanged()
 {
     auto obj = sender();
     if(obj == _player1Timer)
     {
+        if(_player1Timer->remainTime().toSeconds() == 0)
+        {
+            _earlyGameOver = true;
+            _winner = _player2.getColor();
+            emit winnerChanged();
+        }
         emit player1TimeChanged();
     }
     else if(obj == _player2Timer)
     {
+        if(_player2Timer->remainTime().toSeconds() == 0)
+        {
+            _earlyGameOver = true;
+            _winner = _player1.getColor();
+            emit winnerChanged();
+        }
         emit player2TimeChanged();
     }
 }

@@ -86,6 +86,7 @@ private:
     bool _turnPassed{false};
     SwapList _swapList;
     int _invalidPos{-1};
+    bool _earlyGameOver{false};
 
     Player _player1;
     Player _player2;
