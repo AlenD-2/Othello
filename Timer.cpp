@@ -21,6 +21,7 @@ void Timer::start()
 
 void Timer::stop()
 {
+    _remainTime.DecRemainTime(_timer->remainingTime());
     _timer->stop();
 }
 
@@ -45,30 +46,44 @@ RemainTime::RemainTime()
 
 }
 
-void RemainTime::initTime(int seconds)
+void RemainTime::initTime(int miliSec)
 {
-    _remainSeconds = seconds;
+    _remainMiliSec = miliSec;
 }
 
+// convert to QString in clock format M:S
 QString RemainTime::toQString() const
 {
-    return QString::number(_remainSeconds/60)+":"+QString::number(_remainSeconds%60);
+    int remainSeconds = toSeconds();
+    return QString::number(remainSeconds/60)+":"+QString::number(remainSeconds%60);
 }
 
 int RemainTime::toSeconds() const
 {
-    return _remainSeconds;
+    if(_remainMiliSec < 0)
+    {
+        return 0;
+    }
+    return _remainMiliSec/1000;
 }
 
+// decrease the remain miliseconds of timer
+void RemainTime::DecRemainTime(int miliSec)
+{
+    _remainMiliSec = _remainMiliSec-(1000-miliSec);
+}
+
+// decrease one second
 RemainTime RemainTime::operator--()
 {
-    _remainSeconds--;
+    _remainMiliSec-=1000;
     return *this;
 }
 
+// decrease one second
 RemainTime RemainTime::operator--(int)
 {
-    _remainSeconds--;
+    _remainMiliSec-=1000;
     return *this;
 }
 

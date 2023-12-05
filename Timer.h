@@ -9,14 +9,15 @@ class RemainTime
 {
 public:
     RemainTime();
-    void initTime(int seconds);
+    void initTime(int miliSec);
     QString toQString()const;
     int toSeconds()const;
+    void DecRemainTime(int miliSec);
     RemainTime operator--();
     RemainTime operator--(int);
 
 private:
-    int _remainSeconds{90};
+    int _remainMiliSec{90'000};
 };
 
 class Timer : public QObject
