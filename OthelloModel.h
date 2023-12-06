@@ -29,11 +29,13 @@ public:
     Q_PROPERTY(bool turnPassed READ turnPassed /*WRITE setTurnPassed*/ NOTIFY turnPassedChanged FINAL);
     Q_PROPERTY(QVector<bool> swapList READ swapList /*WRITE setSwapList*/ NOTIFY swapListChanged FINAL);
     Q_PROPERTY(int invalidPos READ invalidPos /*WRITE setInvalidPos*/ NOTIFY invalidPosChanged FINAL);
-    Q_PROPERTY(QString player1Time READ player1Time /*WRITE setPlayer1Time*/ NOTIFY player1TimeChanged FINAL);
-    Q_PROPERTY(QString player2Time READ player2Time /*WRITE setPlayer2Time*/ NOTIFY player2TimeChanged FINAL);
 
     //players property
     Q_PROPERTY(QStringList playersName READ playersName /*WRITE setPlayersName*/ NOTIFY playersNameChanged FINAL);
+    Q_PROPERTY(QString player1Time READ player1Time /*WRITE setPlayer1Time*/ NOTIFY player1TimeChanged FINAL);
+    Q_PROPERTY(QString player2Time READ player2Time /*WRITE setPlayer2Time*/ NOTIFY player2TimeChanged FINAL);
+    Q_PROPERTY(int player1Chance READ player1Chance /*WRITE setPlayer1Chance*/ NOTIFY player1ChanceChanged FINAL);
+    Q_PROPERTY(int player2Chance READ player2Chance /*WRITE setPlayer2Chance*/ NOTIFY player2ChanceChanged FINAL);
 
     Q_INVOKABLE void setPosTo(int index, Othello::OthelloBoard::Disk color);
     Q_INVOKABLE void nextTurn();
@@ -53,12 +55,14 @@ signals:
     void turnPassedChanged();
     void swapListChanged();
     void invalidPosChanged();
-    void player1TimeChanged();
-    void player2TimeChanged();
 
     void playersNameChanged();
     void programFinished();
     void startPlayerMove(QString, OthelloBoard::Disk);
+    void player1TimeChanged();
+    void player2TimeChanged();
+    void player1ChanceChanged();
+    void player2ChanceChanged();
 
 public slots:
     QVector<int> board();
@@ -69,13 +73,15 @@ public slots:
     bool turnPassed();
     QVector<bool> swapList();
     int invalidPos();
-    QString player1Time();
-    QString player2Time();
 
     QStringList playersName();
     void onPlayerReady();
     void readPlayerMove(QString move);
     void onTimerChanged();
+    QString player1Time();
+    QString player2Time();
+    int player1Chance();
+    int player2Chance();
 
 private:
     OthelloBoard _board;
@@ -91,9 +97,10 @@ private:
     Player _player1;
     Player _player2;
     QStringList _playersName{"",""};
-
     Timer* _player1Timer;
     Timer* _player2Timer;
+    int _player1Chance{3};
+    int _player2Chance{3};
 
     void exchangeTurn(OthelloBoard::Disk &disk);
 };

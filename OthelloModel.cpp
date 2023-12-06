@@ -22,6 +22,8 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
     {
         _invalidPos = -1; // set as valid move
         emit invalidPosChanged();
+        _player1Chance = 3;
+        _player2Chance = 3;
 
         _board = _game.swapDisks(_board, userPos, color, posList);
         _swapList.updateList(_board.getBoard(), userPos);
@@ -36,6 +38,26 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         // manage invalid move
         _invalidPos = index;
         emit invalidPosChanged();
+        if(color == _player1.getColor())
+        {
+            _player1Chance--;
+            if(_player1Chance == 0)
+            {
+                _earlyGameOver = true;
+                _winner = _player2.getColor();
+                emit winnerChanged();
+            }
+        }
+        else // player2
+        {
+            _player2Chance--;
+            if(_player2Chance == 0)
+            {
+                _earlyGameOver = true;
+                _winner = _player1.getColor();
+                emit winnerChanged();
+            }
+        }
     }
 
     if(_game.isGameOver(_board))
@@ -196,6 +218,16 @@ QString OthelloModel::player1Time()
 QString OthelloModel::player2Time()
 {
     return _player2Timer->remainTime().toQString();
+}
+
+int OthelloModel::player1Chance()
+{
+    return _player1Chance;
+}
+
+int OthelloModel::player2Chance()
+{
+    return _player2Chance;
 }
 
 QStringList OthelloModel::playersName()
