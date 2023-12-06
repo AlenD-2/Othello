@@ -23,7 +23,9 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         _invalidPos = -1; // set as valid move
         emit invalidPosChanged();
         _player1Chance = 3;
+        emit player1ChanceChanged();
         _player2Chance = 3;
+        emit player2ChanceChanged();
 
         _board = _game.swapDisks(_board, userPos, color, posList);
         _swapList.updateList(_board.getBoard(), userPos);
@@ -41,6 +43,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         if(color == _player1.getColor())
         {
             _player1Chance--;
+            emit player1ChanceChanged();
             if(_player1Chance == 0)
             {
                 _earlyGameOver = true;
@@ -51,6 +54,7 @@ void OthelloModel::setPosTo(int index, OthelloBoard::Disk color)
         else // player2
         {
             _player2Chance--;
+            emit player2ChanceChanged();
             if(_player2Chance == 0)
             {
                 _earlyGameOver = true;

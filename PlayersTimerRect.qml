@@ -34,16 +34,19 @@ Rectangle {
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player1Chance < 1? "gray" : "white"
                 }
                 Rectangle{
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player1Chance < 2? "gray" : "white"
                 }
                 Rectangle{
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player1Chance < 3? "gray" : "white"
                 }
             }
         }
@@ -66,16 +69,19 @@ Rectangle {
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player2Chance < 1? "gray" : "white"
                 }
                 Rectangle{
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player2Chance < 2? "gray" : "white"
                 }
                 Rectangle{
                     height: 20
                     Layout.fillWidth: true
                     radius: 10
+                    color: othelloModel.player2Chance < 3? "gray" : "white"
                 }
             }
         }
