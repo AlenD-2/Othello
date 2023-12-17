@@ -57,7 +57,7 @@ signals:
     void invalidPosChanged();
 
     void playersNameChanged();
-    void programFinished();
+    void programFinished(QThread* mainThread);
     void startPlayerMove(QString, OthelloBoard::Disk);
     void player1TimeChanged();
     void player2TimeChanged();

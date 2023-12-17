@@ -31,7 +31,7 @@ signals:
 
 public slots:
     void readPlayerName();
-    void killProcess();
+    void killProcess(QThread *mainThread);
     void readyToMove(QString board, OthelloBoard::Disk color);
 
 private:

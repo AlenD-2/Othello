@@ -11,6 +11,13 @@ Player::Player()
 
 Player::~Player()
 {
+    // a few delay to revert process to main thread
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    if(_playerProcess != nullptr && _playerProcess->state() == QProcess::Running)
+    {
+        _playerProcess->kill();
+        _playerProcess->waitForFinished();
+    }
     _playerThread.exit();
     _playerThread.wait();
 }
@@ -56,13 +63,9 @@ void Player::readPlayerName()
 }
 
 // call it before program terminated
-void Player::killProcess()
+void Player::killProcess(QThread *mainThread)
 {
-    if(_playerProcess != nullptr && _playerProcess->state() == QProcess::Running)
-    {
-        _playerProcess->kill();
-        _playerProcess->waitForFinished();
-    }
+    _playerProcess->moveToThread(mainThread);
 }
 
 void Player::readyToMove(QString board, OthelloBoard::Disk color)

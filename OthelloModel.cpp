@@ -169,7 +169,7 @@ OthelloModel::OthelloModel(QObject *parent)
 
 OthelloModel::~OthelloModel()
 {
-    emit programFinished();
+    emit programFinished(QThread::currentThread());
     // need a few delay to have enough time to kill the player process
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
