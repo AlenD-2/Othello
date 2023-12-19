@@ -128,7 +128,7 @@ Rectangle {
             horizontalCenter: parent.horizontalCenter
             bottomMargin: 50
         }
-        enabled: txt2.text !== "" || txt1.text !== ""
+        enabled: txt2.text !== "" && txt1.text !== ""
         onClicked: {
             loader.source = "GamePage.qml"
             othelloModel.setAiDelay(delaySpin.value)
