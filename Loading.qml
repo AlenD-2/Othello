@@ -133,6 +133,7 @@ Rectangle {
             loader.source = "GamePage.qml"
             othelloModel.setAiDelay(delaySpin.value)
             root.aiDelayValue = (delaySpin.value > 100)? (delaySpin.value-100) : 0
+            othelloModel.nextTurn()
         }
     }
 }
