@@ -44,6 +44,11 @@ void Player::setDelay(int miliSec)
     _delay = miliSec;
 }
 
+void Othello::Player::setParameters(const std::array<int, 3> &params)
+{
+    _parameters = params;
+}
+
 void Player::readPlayerName()
 {
     if(_isFunctional)
@@ -103,6 +108,12 @@ void Player::initProcess()
     }
     else
     {
+        // set parameters
+        for(const auto& par : _parameters)
+        {
+            _playerProcess->write(QString::number(par).toUtf8()+'\n');
+            _playerProcess->waitForBytesWritten();
+        }
         // set the player color
         QString color = QString::number(_color);
         _playerProcess->write(color.toUtf8()+'\n');

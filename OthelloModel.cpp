@@ -140,6 +140,14 @@ void OthelloModel::setAiDelay(int miliSec)
     }
 }
 
+void OthelloModel::setParameters(int p1s1, int p1s2, int p1s3, int p2s1, int p2s2, int p2s3)
+{
+    std::array<int,3> p1{p1s1,p1s2,p1s3};
+    _player1.setParameters(p1);
+    std::array<int,3> p2{p2s1,p2s2,p2s3};
+    _player2.setParameters(p2);
+}
+
 OthelloModel::OthelloModel(QObject *parent)
     : QObject{parent}
 {

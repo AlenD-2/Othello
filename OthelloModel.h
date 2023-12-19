@@ -41,6 +41,7 @@ public:
     Q_INVOKABLE void nextTurn();
     Q_INVOKABLE void setGameMode(int modeIndex);
     Q_INVOKABLE void setAiDelay(int miliSec);
+    Q_INVOKABLE void setParameters(int p1s1, int p1s2, int p1s3, int p2s1, int p2s2, int p2s3);
 
 public:
     explicit OthelloModel(QObject *parent = nullptr);

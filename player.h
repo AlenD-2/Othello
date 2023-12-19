@@ -22,6 +22,7 @@ public:
     QString getPlayerName()const;
     OthelloBoard::Disk getColor()const;
     void setDelay(int miliSec);
+    void setParameters(const std::array<int,3> &params);
 
 signals:
     void playerReady();
@@ -41,6 +42,7 @@ private:
     OthelloBoard::Disk _color;
     int _delay{1000};
     bool _isFunctional{false};
+    std::array<int,3> _parameters;
 
     //functions
     void initProcess();
