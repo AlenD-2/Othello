@@ -1,47 +1,103 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Rectangle {
     anchors.fill: parent
     color: "green"
 
-    Row{
+    RowLayout{
         anchors.centerIn: parent
-        spacing: 100
+        spacing: 200
 
-        Item{
-            width: childrenRect.width
-            height: childrenRect.height
-            Text{
-                id: txt1
-                text: othelloModel.playersName[0]
-                visible: text !== ""
-                anchors.centerIn: parent
+        ColumnLayout{
+            spacing: 30
+            Item{
+                width: childrenRect.width
+                height: childrenRect.height
+                Layout.alignment: Qt.AlignHCenter
+                Text{
+                    id: txt1
+                    text: othelloModel.playersName[0]
+                    visible: text !== ""
+                    anchors.centerIn: parent
+                    font.pointSize: 32
+                }
+
+                BusyIndicator{
+                    id: busy1
+                    width: 100
+                    height: width
+                    visible: txt1.text === ""
+                }
             }
-
-            BusyIndicator{
-                id: busy1
-                width: 100
-                height: width
-                visible: txt1.text === ""
+            RowLayout{
+                TextField{
+                    id: p1set1
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting1"
+                    enabled: txt1.text != "Human"
+                }
+                TextField{
+                    id: p1set2
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting2"
+                    enabled: txt1.text != "Human"
+                }
+                TextField{
+                    id: p1set3
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting3"
+                    enabled: txt1.text != "Human"
+                }
             }
         }
 
-        Item{
-            width: childrenRect.width
-            height: childrenRect.height
-            Text{
-                id: txt2
-                text: othelloModel.playersName[1]
-                visible: text !== ""
-                anchors.centerIn: parent
-                font.pointSize: 32
+        ColumnLayout{
+            spacing: 30
+            Item{
+                width: childrenRect.width
+                height: childrenRect.height
+                Layout.alignment: Qt.AlignHCenter
+                Text{
+                    id: txt2
+                    text: othelloModel.playersName[1]
+                    visible: text !== ""
+                    anchors.centerIn: parent
+                    font.pointSize: 32
+                }
+                BusyIndicator{
+                    id: busy2
+                    width: 100
+                    height: width
+                    visible: txt2.text === ""
+                }
             }
-            BusyIndicator{
-                id: busy2
-                width: 100
-                height: width
-                visible: txt2.text === ""
+            RowLayout{
+                TextField{
+                    id: p2set1
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting1"
+                    enabled: txt2.text != "Human"
+                }
+                TextField{
+                    id: p2set2
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting2"
+                    enabled: txt2.text != "Human"
+                }
+                TextField{
+                    id: p2set3
+                    background.width: 70
+                    maximumLength: 4
+                    placeholderText: "setting3"
+                    enabled: txt2.text != "Human"
+                }
             }
         }
     }
