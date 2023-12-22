@@ -100,7 +100,14 @@ void Player::readyToMove(QString board, OthelloBoard::Disk color)
 void Player::initProcess()
 {
     _playerProcess = std::make_unique<QProcess>();
-    _playerProcess->setProgram(QDir::currentPath()+"/p1.exe");
+    if(_color == OthelloBoard::Disk::black)
+    {
+        _playerProcess->setProgram(QDir::currentPath()+"/p1.exe");
+    }
+    else
+    {
+        _playerProcess->setProgram(QDir::currentPath()+"/p2.exe");
+    }
     _playerProcess->start();
     if(!_playerProcess->waitForStarted())
     {
