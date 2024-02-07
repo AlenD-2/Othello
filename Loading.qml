@@ -37,29 +37,6 @@ Rectangle {
                     visible: txt1.text === ""
                 }
             }
-//            RowLayout{
-//                TextField{
-//                    id: p1set1
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting1"
-//                    enabled: txt1.text != "Human"
-//                }
-//                TextField{
-//                    id: p1set2
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting2"
-//                    enabled: txt1.text != "Human"
-//                }
-//                TextField{
-//                    id: p1set3
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting3"
-//                    enabled: txt1.text != "Human"
-//                }
-//            }
         }
 
         ColumnLayout{
@@ -83,29 +60,6 @@ Rectangle {
                     visible: txt2.text === ""
                 }
             }
-//            RowLayout{
-//                TextField{
-//                    id: p2set1
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting1"
-//                    enabled: txt2.text != "Human"
-//                }
-//                TextField{
-//                    id: p2set2
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting2"
-//                    enabled: txt2.text != "Human"
-//                }
-//                TextField{
-//                    id: p2set3
-//                    background.width: 70
-//                    maximumLength: 4
-//                    placeholderText: "setting3"
-//                    enabled: txt2.text != "Human"
-//                }
-//            }
         }
     }
 
