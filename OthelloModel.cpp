@@ -308,6 +308,7 @@ void OthelloModel::onTimerChanged()
 void OthelloModel::exchangeTurn(OthelloBoard::Disk& disk)
 {
     disk = (disk==OthelloBoard::Disk::black)? OthelloBoard::Disk::white : OthelloBoard::Disk::black;
+    emit whosTurnChanged();
 }
 
 } // namespace Othello

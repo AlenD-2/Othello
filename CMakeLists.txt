@@ -33,9 +33,12 @@ qt_add_qml_module(appOthello
     PTimer.qml
     GamePage.qml
     PlayersNameItem.qml
-    PlayersTimerRect.qml
+    PlayerHearts.qml
     Board.qml
     GameOver.qml
+    PlayerTimer.qml
+    PlayerScore.qml
+    PlayerName.qml
 )
 
 set_target_properties(appOthello PROPERTIES

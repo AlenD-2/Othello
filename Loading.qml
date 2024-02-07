@@ -6,6 +6,11 @@ Rectangle {
     anchors.fill: parent
     color: "green"
 
+    Image {
+        source: "/img/image/Menu Background.png"
+        anchors.fill: parent
+    }
+
     RowLayout{
         anchors.centerIn: parent
         spacing: 200
@@ -22,6 +27,7 @@ Rectangle {
                     visible: text !== ""
                     anchors.centerIn: parent
                     font.pointSize: 32
+                    color: "white"
                 }
 
                 BusyIndicator{
@@ -68,6 +74,7 @@ Rectangle {
                     visible: text !== ""
                     anchors.centerIn: parent
                     font.pointSize: 32
+                    color: "white"
                 }
                 BusyIndicator{
                     id: busy2

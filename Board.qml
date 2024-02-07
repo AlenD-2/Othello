@@ -2,22 +2,34 @@ import QtQuick
 
 Rectangle{
     id: gridViewArea
-    color: "#6d4848"
+    color: "transparent"//"#282828"
+//    border.color: "#52983d"
+
+//    Image {
+//        source: "/image/board border.png"
+//        anchors.fill: parent
+//    }
 
     GridView{
-        width: parent.width-30
-        height: parent.height-30
+        id: gridView
         anchors.centerIn: parent
-        cellWidth: (width/8)-1 // -1 is cell border.width
-        cellHeight: (height/8)-1
+        width: parent.width//-35
+        height: parent.height//-35
+        cellWidth: (width/8)//-1 // -1 is cell border.width
+        cellHeight: (height/8)//-1
         interactive: false
         model: othelloModel.board
         delegate: Rectangle{
-            width: gridViewArea.width/8
-            height: gridViewArea.height/8
+            width: gridView.width/8
+            height: gridView.height/8
             color: (othelloModel.invalidPos === index)? "red" : "green"
             border.width: 1
-            border.color: "black"
+            border.color: "#1c1b1a"
+//            Image{
+//                anchors.fill: parent
+//                source: "/image/cell.png"
+//            }
+
             Image{
                 id: innerRect
                 width: parent.width-20

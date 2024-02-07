@@ -9,7 +9,7 @@ Window {
     width: 640
     height: 700
     visible: true
-    visibility: Window.Maximized
+    visibility: Window.FullScreen
     title: qsTr("Othello")
 
     property int aiDelayValue: 1000

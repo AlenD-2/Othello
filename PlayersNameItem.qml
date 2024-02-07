@@ -24,6 +24,7 @@ Item {
                 id: p1name
                 text: player1Name
                 font.pointSize: nameTxtSize
+                color: "white"
             }
             Image{
                 sourceSize: Qt.size(diskSize,diskSize)
@@ -41,6 +42,7 @@ Item {
             text: "Vs"
             Layout.alignment: Qt.AlignCenter
             font.pointSize: vsTxtSize
+            color: "white"
         }
         RowLayout{
             spacing: rowSpacing
@@ -58,6 +60,7 @@ Item {
             Text{
                 text: player2Name
                 font.pointSize: nameTxtSize
+                color: "white"
             }
         }
     }

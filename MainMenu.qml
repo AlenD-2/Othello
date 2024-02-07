@@ -7,6 +7,11 @@ Rectangle {
     anchors.fill: parent
     color: "green"
 
+    Image {
+        source: "/img/image/Menu Background.png"
+        anchors.fill: parent
+    }
+
     property int btnWidth: 120
     property int btnHeight: 40
     property int btnFontSize: 12
@@ -20,6 +25,7 @@ Rectangle {
             Text{
                 text: "Player1: "
                 font.pixelSize: 18
+                color: "white"
             }
             TextField{
                 id: p1set1
@@ -47,6 +53,7 @@ Rectangle {
             Text{
                 text: "Player2: "
                 font.pixelSize: 18
+                color: "white"
             }
             TextField{
                 id: p2set1

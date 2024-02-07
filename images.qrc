@@ -2,5 +2,13 @@
     <qresource prefix="/img">
         <file>image/black disk.png</file>
         <file>image/white disk.png</file>
+        <file>image/heart.png</file>
+        <file>image/player border active.png</file>
+        <file>image/player border deactive.png</file>
+        <file>image/Menu Background.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>image/background.png</file>
+        <file>image/board border.png</file>
     </qresource>
 </RCC>
