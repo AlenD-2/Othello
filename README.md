@@ -2,6 +2,19 @@
 
 # انجین مسابقات هوش مصنوعی Othello Challenge
 ![](https://evand.com/_next/image?url=https%3A%2F%2Fstatic.evand.net%2Fimages%2Fevents%2Fcovers%2Foriginal%2F67eb1e1f30229276a0d4ed1d0e80c39e.jpg%3Fx-oss-process%3Dimage%2Fformat%2Cwebp%2Fquality%2Cq_100&w=1920&q=100)
+
+انجین بازی اتللو برای مسابقات هوش مصنوعی.
+
+سه حالت مختلف برای اجرای بازی:
+<div dir="LTR">
+
+- Human Vs Human (without Ai)
+- Human Vs Code (challenge your code)
+- Code Vs Code
+</div>
+
+[![Screen-Shot.png](https://i.postimg.cc/3wngVYjS/Screen-Shot.png)](https://postimg.cc/McfMjkFV)
+
 ## توضیح مسابقه
 مسابقه هوش مصنوعی در بستر بازی اوتللو انجام خواهد شد که در آن
 هوش مصنوعی نوشته شده توسط شرکت کنندگان به صورت یک رقیب برای کد 
