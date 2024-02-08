@@ -27,4 +27,17 @@ Window {
         anchors.fill: parent
         source: "MainMenu.qml"
     }
+
+    Button{
+        anchors{
+            right: parent.right
+            top: parent.top
+            margins: 10
+        }
+        text: " X "
+        font.pointSize: 18
+        onClicked: {
+            Qt.quit()
+        }
+    }
 }
